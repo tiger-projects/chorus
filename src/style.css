@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "Union";
+  src: url("union_regular.otf") format("opentype");
+}
+
+body {
+  font-family: "Union", sans-serif;
+}
+
+.full-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.name-title {
+  font-size: 10vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.email-link {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+}
+
+@media all and (orientation: portrait) {
+  .name-title {
+    font-size: 15vw;
+  }
+}

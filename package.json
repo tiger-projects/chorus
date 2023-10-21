@@ -1,0 +1,16 @@
+{
+  "name": "chorus",
+  "version": "1.0.0",
+  "description": "www.chorus.asia",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd src && live-server --port=3000",
+    "build": "mkdir dist && cp src/** dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

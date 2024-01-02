@@ -7,7 +7,6 @@ import LanguageToggle from "./LanguageToggle";
 import Dropdown from "./Dropdown";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { motion } from "framer-motion";
-import { scroll } from "framer-motion";
 
 interface LayoutProps {
   title: string;
@@ -16,7 +15,7 @@ interface LayoutProps {
   location?: Location;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ location, children }) => {
   const pageWrapRef = useRef<HTMLDivElement>(null);
 
   const handleMouseWheel = (event: any) => {
@@ -67,7 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return {
       color: isDropdownOpen
         ? "#c8c9c2"
-        : location.pathname === path || location.pathname === "/"
+        : location?.pathname === path || location?.pathname === "/"
         ? "black"
         : "#c8c9c2",
     };

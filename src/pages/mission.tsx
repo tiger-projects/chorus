@@ -3,9 +3,8 @@ import type { HeadFC, PageProps } from "gatsby";
 import Layout from "../components/Layout";
 import "../styles/global.css";
 import { useGlobalContext } from "../context/languageContext";
-import { graphql } from "gatsby";
 
-const MissionPage: React.FC<PageProps> = ({ data, location }) => {
+const MissionPage: React.FC<PageProps> = ({ location }) => {
   const { getTranslation } = useGlobalContext();
   const text = getTranslation("mission_text");
 

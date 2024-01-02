@@ -13,6 +13,7 @@ interface DropdownProps {
   isDropdownOpen: boolean;
   setDropdownOpen: (isOpen: boolean) => void;
   hoveredProjectTitle: string | null;
+  currentPath: string;
   setHoveredProjectTitle: (title: string | null) => void;
 }
 
@@ -21,6 +22,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   isDropdownOpen,
   setDropdownOpen,
   setHoveredProjectTitle,
+  currentPath,
 }) => {
   const { language, getTranslation } = useGlobalContext();
 
@@ -81,7 +83,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         onClick={handleDropdownToggle}
         style={{
           color:
-            location.pathname === "/"
+            currentPath === "/"
               ? "black"
               : isDropdownOpen
               ? "black"

@@ -16,6 +16,8 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ location, children }) => {
+  const currentPath = location?.pathname;
+
   const pageWrapRef = useRef<HTMLDivElement>(null);
 
   const handleMouseWheel = (event: any) => {
@@ -66,7 +68,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
     return {
       color: isDropdownOpen
         ? "#c8c9c2"
-        : location?.pathname === path || location?.pathname === "/"
+        : currentPath === path || currentPath === "/"
         ? "black"
         : "#c8c9c2",
     };
@@ -120,6 +122,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
               </Link>
 
               <Dropdown
+                currentPath={currentPath || ""}
                 setDropdownOpen={setDropdownOpen}
                 isDropdownOpen={isDropdownOpen}
                 hoveredProjectTitle={hoveredProjectTitle}

@@ -3,24 +3,37 @@ import type { HeadFC, PageProps } from "gatsby";
 import Layout from "../components/Layout";
 import "../styles/global.css";
 import { useGlobalContext } from "../context/languageContext";
+import { graphql } from "gatsby";
 
-const IndexPage: React.FC<PageProps> = ({ data, location }) => {
+const MissionPage: React.FC<PageProps> = ({ data, location }) => {
   const { getTranslation } = useGlobalContext();
+  const text = getTranslation("mission_text");
 
   return (
     <Layout
       location={location}
-      title={"Chorus Homepage"}
+      title={"Chorus Mission Page"}
       description="Chorus description"
     >
-      <div className="page-container___home">
-        <p>{getTranslation("home_text")}</p>
+      <div className="page-container">
+        {typeof text === "string" && <p>{text}</p>}
+        {typeof text === "object" && (
+          <>
+            {Object.keys(text).map(function (key: any) {
+              return (
+                <p className="mission-text" key={key}>
+                  {text[key]}
+                </p>
+              );
+            })}
+          </>
+        )}
       </div>
     </Layout>
   );
 };
 
-export default IndexPage;
+export default MissionPage;
 
 export const Head: HeadFC = () => (
   <>

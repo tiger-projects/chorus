@@ -4,17 +4,17 @@ export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <link
       rel="preload"
-      href="/fonts/ChromaSTTrial-Bold.woff"
+      href="/fonts/ChromaST_Bold.woff2"
       as="font"
-      type="font/woff"
+      type="font/woff2"
       crossOrigin="anonymous"
       key="chromas"
     />,
     <link
       rel="preload"
-      href="/fonts/GaramondNarrowC.woff"
+      href="/fonts/GaramondNarrowC.otf"
       as="font"
-      type="font/woff"
+      type="font/otf"
       crossOrigin="anonymous"
       key="garamond"
     />,

@@ -3,6 +3,9 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import "./src/styles/global.css";
 
+import "@fontsource-variable/noto-sans-jp";
+import "@fontsource/noto-serif-jp";
+
 export const wrapRootElement = ({ element }) => (
   <RootElement>{element}</RootElement>
 );

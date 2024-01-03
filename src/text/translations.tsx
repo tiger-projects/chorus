@@ -26,7 +26,7 @@ export const translations: Translations = {
     footer_logo_text:
       "(noun)  / Part of a song recurring between verses  / Group of backing vocalists supporting the lead singer",
 
-    home_text: "Connecting Asian Music and Culture with the World",
+    home_text: "アジアの音楽と文化を世界と繋ぐ",
     mission_text: [
       "CHORUS is a new ecosystem dedicated to uplifting and connecting Asian music and culture with the world. ",
       "Founded by renowned Asian executives, CHORUS strives to support Asian artists and their teams to achieve true resonance worldwide. Our vision is to advance the representation and celebration of Asian music from across the continent and diaspora, and elevate its place on the global stage. ",

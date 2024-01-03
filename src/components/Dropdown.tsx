@@ -1,6 +1,5 @@
 import React from "react";
 import { useGlobalContext } from "../context/languageContext";
-import { Link } from "gatsby";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Translation {
@@ -15,6 +14,7 @@ interface DropdownProps {
   hoveredProjectTitle: string | null;
   currentPath: string;
   setHoveredProjectTitle: (title: string | null) => void;
+  darkPaletteStyle: any;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -23,6 +23,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   setDropdownOpen,
   setHoveredProjectTitle,
   currentPath,
+  darkPaletteStyle,
 }) => {
   const { language, getTranslation } = useGlobalContext();
 
@@ -65,53 +66,63 @@ const Dropdown: React.FC<DropdownProps> = ({
   const itemList = Object.entries(rosterItemsSelectedLang).map(
     ([key, value], index) => {
       return (
-        <li
+        <motion.li
+          whileHover={{ scale: 1.1, transition: { duration: 0.5 } }}
+          whileTap={{ scale: 0.9 }}
           key={index}
           onMouseEnter={() => handleMouseEnter(value)}
           onMouseLeave={() => handleMouseLeave()}
         >
           <a href="#">{value}</a>
-        </li>
+        </motion.li>
       );
     }
   );
 
   return (
     <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
-      <a
+      <motion.a
         href="#"
+        style={darkPaletteStyle}
+        id="navbar-main--link"
         onClick={handleDropdownToggle}
-        style={{
-          color:
-            currentPath === "/"
-              ? "black"
-              : isDropdownOpen
-              ? "black"
-              : "#c8c9c2",
-
-          transition: " color 0.3s ease",
+        exit={{ opacity: "#c8c9c2" }}
+        initial={{ color: "#c8c9c2" }}
+        animate={{
+          color: currentPath === "/" || isDropdownOpen ? "#000" : "#c8c9c2",
+          transition: { delay: 0, duration: 0.3, ease: "easeInOut" },
         }}
       >
         {getTranslation("nav_link_two")}
-      </a>
-      <AnimatePresence>
-        {isDropdownOpen && (
-          <motion.div
-            key="modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+      </motion.a>
+      {isDropdownOpen && (
+        <motion.div
+          key="dropdown"
+          exit={{ opacity: 0, y: -10, filter: "blur(10px)" }}
+          initial={{ opacity: 0, y: -10, filter: "blur(0px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{
+            type: "spring",
+            delay: 0.1,
+            duration: 0.3,
+            ease: "easeIn",
+          }}
+        >
+          <div
             className="dropdown-content"
             style={{
               background: isDropdownOpen ? "transparent" : "#c8c9c2",
-              transition: "background 0.3s ease",
             }}
           >
-            <ul className="roterItemsList">{itemList}</ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <ul
+              style={darkPaletteStyle}
+              className={`${language}-font roterItemsList`}
+            >
+              {itemList}
+            </ul>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 };

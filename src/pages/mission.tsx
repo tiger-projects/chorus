@@ -36,16 +36,26 @@ export default MissionPage;
 
 export const Head: HeadFC = () => (
   <>
-    <title>Chorus </title>{" "}
+    <title>Chorus Mission</title>
     <meta
       name="description"
       content={
-        "CHORUS is a new ecosystem dedicated to uplifting and connecting Asian music and culture with the world.Founded by renowned Asian executives, CHORUS strives to support Asian artists and their teams to achieve true resonance worldwide. Our vision is to advance the representation and celebration of Asian music from across the continent and diaspora, and elevate its place on the global stage."
+        "CHORUS is a ecosystem dedicated to uplifting and connecting Asian music and culture with the world. Founded by renowned Asian executives, CHORUS strives to support Asian artists and their teams to achieve true resonance worldwide."
       }
+    />
+    <meta property="og:title" content="Chorus" />{" "}
+    <meta
+      property="og:description"
+      content="CHORUS is a ecosystem dedicated to uplifting and connecting Asian music and culture with the world. Founded by renowned Asian executives, CHORUS strives to support Asian artists and their teams to achieve true resonance worldwide."
     />
     <meta
       property="og:image"
       content={"https://venerable-blini-d2f5ee.netlify.app/Share.png"}
     />
+    <meta
+      property="og:image"
+      content={"https://venerable-blini-d2f5ee.netlify.app/Share.png"}
+    />
+    <meta name="pinterest-rich-pin" content="false" />
   </>
 );

@@ -1,12 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Logo from "../images/logo.svg";
+import InvertedLogo from "../images/logo-white.svg";
 import { Link } from "gatsby";
 import { useGlobalContext } from "../context/languageContext";
 import LanguageToggle from "./LanguageToggle";
 import Dropdown from "./Dropdown";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, Spring, Variants } from "framer-motion";
 
 interface LayoutProps {
   title: string;
@@ -15,9 +16,12 @@ interface LayoutProps {
   location?: Location;
 }
 
-const Layout: React.FC<LayoutProps> = ({ location, children }) => {
-  const currentPath = location?.pathname;
+interface FeaturedImage {
+  id: string;
+  gatsbyImageData: any;
+}
 
+const Layout: React.FC<LayoutProps> = ({ location, children }) => {
   const pageWrapRef = useRef<HTMLDivElement>(null);
 
   const handleMouseWheel = (event: any) => {
@@ -31,6 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
   const [hoveredProjectTitle, setHoveredProjectTitle] = React.useState<
     string | null
   >(null);
+  const [activeLink, setActiveLink] = React.useState("");
 
   const data = useStaticQuery(
     graphql`
@@ -41,6 +46,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
               id
               englishProjectTitle
               japaneseProjectTitle
+              darkPalette
               featuredImage {
                 asset {
                   gatsbyImageData
@@ -60,9 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
     return null;
   }
 
-  const handleDropdownClose = () => {
-    setDropdownOpen(false);
-  };
+  const currentPath = location?.pathname;
 
   const getLinkStyle = (path: string) => {
     return {
@@ -74,32 +78,85 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
     };
   };
 
+  const handleLinkClick = (link: string) => {
+    if ((currentPath ?? "").includes(link)) {
+      setDropdownOpen(false);
+    }
+    setActiveLink(link);
+  };
+
   const extractedRosterItems = rosterItems.map((item: any) => {
-    const { id, englishProjectTitle, japaneseProjectTitle, featuredImage } =
-      item.node;
+    const {
+      id,
+      englishProjectTitle,
+      japaneseProjectTitle,
+      featuredImage,
+      darkPalette,
+    } = item.node;
     return {
       id,
       englishProjectTitle,
       japaneseProjectTitle,
       featuredImage,
+      darkPalette,
     };
   });
 
-  const getFeaturedImage = (title: string) => {
+  const getFeaturedImage = (title: string): FeaturedImage | null => {
     const selectedItem = extractedRosterItems.find(
-      language === "en"
-        ? (item: any) => item.englishProjectTitle === title
-        : (item: any) => item.japaneseProjectTitle === title
+      (item: any) =>
+        (language === "en" && item.englishProjectTitle === title) ||
+        (language === "jp" && item.japaneseProjectTitle === title)
     );
-    return selectedItem?.featuredImage?.asset.gatsbyImageData || null;
+
+    if (selectedItem) {
+      const { id, featuredImage } = selectedItem;
+      const gatsbyImageData = featuredImage?.asset.gatsbyImageData;
+
+      if (gatsbyImageData) {
+        return { id, gatsbyImageData };
+      }
+    }
+
+    return null;
   };
 
   const displayedImage = hoveredProjectTitle
     ? getFeaturedImage(hoveredProjectTitle)
     : null;
 
+  const getPalette = (title: string) => {
+    const selectedItem = extractedRosterItems.find(
+      language === "en"
+        ? (item: any) =>
+            item.darkPalette !== true && item.englishProjectTitle === title
+        : (item: any) =>
+            item.darkPalette !== true && item.japaneseProjectTitle === title
+    );
+    return selectedItem;
+  };
+
+  const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
+
+  // console.log("pallete", pallete);
+
+  const darkPaletteStyle = pallete ? { filter: "invert(100%)" } : {};
+  const darkPaletteBackground = pallete
+    ? { background: "rgba(107, 110, 105 .8) " }
+    : {};
+
+  const darkImage = pallete ? { filter: "brightness(50%)" } : {};
+
+  const darkFooterPalette = pallete
+    ? {
+        color: "#FAFBF9",
+        opacity: 0.8,
+        filter: "invert(100%) brightness(100%)",
+      }
+    : {};
+
   return (
-    <div id="app">
+    <div style={darkPaletteBackground} className={`${language}-font app`}>
       <header>
         <div
           id="page-wrap"
@@ -113,15 +170,17 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
           <div className="navbar">
             <div className="center-links">
               <Link
-                className="navbar-main--link"
+                id="navbar-main--link"
                 style={getLinkStyle("/mission/")}
                 to="/mission"
-                onClick={handleDropdownClose}
+                onClick={() => handleLinkClick("mission")}
+                className={activeLink === "mission" ? "activeLink" : ""}
               >
                 {getTranslation("nav_link_one")}
               </Link>
 
               <Dropdown
+                darkPaletteStyle={darkPaletteStyle}
                 currentPath={currentPath || ""}
                 setDropdownOpen={setDropdownOpen}
                 isDropdownOpen={isDropdownOpen}
@@ -131,9 +190,11 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
               />
 
               <Link
-                style={getLinkStyle("/contact/")}
+                id="navbar-main--link"
                 to="/contact"
-                onClick={handleDropdownClose}
+                onClick={() => handleLinkClick("contact")}
+                style={getLinkStyle("/contact/")}
+                className={activeLink === "contact" ? "activeLink" : ""}
               >
                 {getTranslation("nav_link_three")}
               </Link>
@@ -144,38 +205,54 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
           </div>
         </div>
         {displayedImage && (
-          <div className="roster-image-container">
-            <GatsbyImage
+          <div className="roster-image-container" style={darkImage}>
+            <motion.div
               className="roster-image"
-              image={displayedImage}
-              alt="Featured image"
-              objectFit="cover"
-            />
+              key={displayedImage.id}
+              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.5, ease: "easeIn" }}
+            >
+              <GatsbyImage
+                className="roster-image"
+                image={displayedImage.gatsbyImageData}
+                alt="Featured image"
+                objectFit="cover"
+              />
+            </motion.div>
           </div>
         )}
       </header>
       <motion.main
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-        exit={{
-          opacity: 0,
-        }}
+        key={currentPath}
+        exit={{ opacity: 0, filter: "blur(0px)" }}
+        initial={{ opacity: 0, filter: "blur(10px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
         transition={{
-          ease: "linear",
+          type: "Spring",
           duration: 0.3,
+          ease: "easeIn",
         }}
       >
         {!isDropdownOpen && children}
       </motion.main>
-      <footer>
-        <Link to="/">
-          <Logo />
+
+      <motion.footer
+        style={{ ...darkFooterPalette }}
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1, duration: 0.3, ease: "easeIn" }}
+      >
+        <Link
+          style={{ background: isDropdownOpen ? "transparent" : "#e8e9e1" }}
+          className="footer-link"
+          to="/"
+        >
+          {pallete ? <InvertedLogo /> : <Logo />}
         </Link>
-      </footer>
+      </motion.footer>
     </div>
   );
 };

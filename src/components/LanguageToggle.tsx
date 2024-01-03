@@ -1,10 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useGlobalContext } from "../context/languageContext";
-
-interface Translation {
-  en: Record<string, string>;
-  jp: Record<string, string>;
-}
 
 const LanguageToggle: React.FC = () => {
   const { language, toggleLanguage } = useGlobalContext();
@@ -12,6 +7,7 @@ const LanguageToggle: React.FC = () => {
     <>
       <a
         href="#"
+        id="navbar-main--link"
         className={`language-label label-en ${
           language === "en" ? " langActive" : ""
         }`}
@@ -21,8 +17,12 @@ const LanguageToggle: React.FC = () => {
         en
       </a>
 
-      <div className="language-toggler--seperator">/</div>
+      <div id="navbar-main--link" className="language-toggler--seperator">
+        /
+      </div>
       <a
+        id="navbar-main--link"
+        style={{ fontFamily: "'Noto Sans JP Variable', sans-serif" }}
         href="#"
         className={`language-label label-jp${
           language === "jp" ? " langActive" : ""
@@ -30,7 +30,7 @@ const LanguageToggle: React.FC = () => {
         data-lang="jp"
         onClick={() => toggleLanguage("jp")}
       >
-        jp
+        日本語
       </a>
     </>
   );

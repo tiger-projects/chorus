@@ -14,9 +14,20 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
         <p>
           For further enquiries and to request additional details, please email:
           <br />
-          info@chorus.asia
+          <a className="contact_page__links" href="mailto:info@chorus.asia">
+            info@chorus.asia
+          </a>
         </p>
-        <p>Follow us on Instagram and LinkedIn</p>
+        <p>
+          Follow us on{" "}
+          <a className="contact_page__links" href="#">
+            Instagram{" "}
+          </a>{" "}
+          and{" "}
+          <a className="contact_page__links" href="#">
+            LinkedIn
+          </a>
+        </p>
       </div>
     </Layout>
   );
@@ -37,5 +48,6 @@ export const Head: HeadFC = () => (
       property="og:image"
       content={"https://venerable-blini-d2f5ee.netlify.app/Share.png"}
     />
+    <meta name="pinterest-rich-pin" content="false" />
   </>
 );

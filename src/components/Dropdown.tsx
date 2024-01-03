@@ -86,7 +86,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         style={darkPaletteStyle}
         id="navbar-main--link"
         onClick={handleDropdownToggle}
-        exit={{ opacity: "#c8c9c2" }}
+        exit={{ color: "#c8c9c2" }}
         initial={{ color: "#c8c9c2" }}
         animate={{
           color: currentPath === "/" || isDropdownOpen ? "#000" : "#c8c9c2",

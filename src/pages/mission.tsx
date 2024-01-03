@@ -10,11 +10,12 @@ const MissionPage: React.FC<PageProps> = ({ location }) => {
 
   return (
     <Layout
+      overflow={true}
       location={location}
       title={"Chorus Mission Page"}
       description="Chorus description"
     >
-      <div className="page-container">
+      <div className="page-container mission">
         {typeof text === "string" && <p>{text}</p>}
         {typeof text === "object" && (
           <>

@@ -177,7 +177,6 @@ html {
   max-width: 100vw;
   grid-area: main;
   padding: 0.5rem 1rem;
-  overflow-y: scroll;
 }
 
 .app > footer {
@@ -355,7 +354,7 @@ a.langActive {
   align-items: center;
   margin: 0;
   padding: 0;
-  height: 86vh;
+  height: 85vh;
 }
 
 /* .roster-image {
@@ -405,10 +404,6 @@ header {
   padding-bottom: 1rem;
 }
 
-.page-container__home,
-.page-container {
-  height: 85vh;
-}
 .page-container__home > p,
 .page-container > p {
   font-size: 1.375rem;
@@ -420,7 +415,16 @@ header {
   margin-bottom: 1.375rem;
 }
 
+.page-container__home,
+.page-container {
+  height: 100vh;
+}
+
 @media (min-width: 767px) {
+  .page-container__home,
+  .page-container {
+    height: 80vh;
+  }
   .center-links,
   .lanuguag-toggle {
     font-size: 1rem;
@@ -466,4 +470,8 @@ header {
 }
 .contact_page__links:hover {
   color: #c8c9c2;
+}
+
+.overflow-scroll {
+  overflow-y: scroll;
 }

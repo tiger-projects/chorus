@@ -138,12 +138,13 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
 
   const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
 
-  // console.log("pallete", pallete);
+  console.log("pallete", pallete);
 
   const darkPaletteStyle = pallete ? { filter: "invert(100%)" } : {};
+
   const darkPaletteBackground = pallete
-    ? { background: "rgba(107, 110, 105 .8) " }
-    : {};
+    ? { backgroundColor: "rgba(107, 110, 105, 0.7)" }
+    : { backgroundColor: "#e8e9e1" };
 
   const darkImage = pallete ? { filter: "brightness(50%)" } : {};
 
@@ -156,7 +157,10 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
     : {};
 
   return (
-    <div style={darkPaletteBackground} className={`${language}-font app`}>
+    <motion.div
+      style={darkPaletteBackground}
+      className={`${language}-font app`}
+    >
       <header>
         <div
           id="page-wrap"
@@ -205,9 +209,9 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
           </div>
         </div>
         {displayedImage && (
-          <div className="roster-image-container" style={darkImage}>
+          <div className="roster-image-motion-container" style={darkImage}>
             <motion.div
-              className="roster-image"
+              className="roster-image-container"
               key={displayedImage.id}
               exit={{ opacity: 0 }}
               initial={{ opacity: 0 }}
@@ -242,7 +246,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
         style={{ ...darkFooterPalette }}
         exit={{ opacity: 0 }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: pallete ? 0.7 : 1 }}
         transition={{ delay: 0.1, duration: 0.3, ease: "easeIn" }}
       >
         <Link
@@ -253,7 +257,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children }) => {
           {pallete ? <InvertedLogo /> : <Logo />}
         </Link>
       </motion.footer>
-    </div>
+    </motion.div>
   );
 };
 

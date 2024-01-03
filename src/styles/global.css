@@ -150,10 +150,15 @@ a:active {
   11. Layout
 */
 
+html {
+  min-height: -webkit-fill-available;
+}
+
 .app {
   background: var(--light-grey);
   max-width: 100vw;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;

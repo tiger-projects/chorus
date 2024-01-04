@@ -75,13 +75,13 @@ const Dropdown: React.FC<DropdownProps> = ({
       {isDropdownOpen && (
         <motion.div
           key="dropdown"
-          exit={{ opacity: 0, y: -10, filter: "blur(10px)" }}
-          initial={{ opacity: 0, y: -10, filter: "blur(0px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, filter: "blur(10px)" }}
+          initial={{ opacity: 0, filter: "blur(0px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{
             type: "spring",
             delay: 0.1,
-            duration: 0.3,
+            duration: 0.4,
             ease: "easeIn",
           }}
         >

@@ -20,11 +20,17 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
         </p>
         <p>
           Follow us on{" "}
-          <a className="contact_page__links" href="#">
+          <a
+            className="contact_page__links"
+            href="https://www.instagram.com/chorusasia/"
+          >
             Instagram{" "}
           </a>{" "}
           and{" "}
-          <a className="contact_page__links" href="#">
+          <a
+            className="contact_page__links"
+            href="https://www.linkedin.com/company/chorusasia/"
+          >
             LinkedIn
           </a>
         </p>

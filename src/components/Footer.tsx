@@ -1,8 +1,10 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { Link } from "gatsby";
 import Logo from "../images/logo.svg";
 import InvertedLogo from "../images/logo-white.svg";
+import LogoJp from "../images/logo-jp.svg";
+import InvertedLogoJp from "../images/logo-jp-white.svg";
+import { useGlobalContext } from "../context/languageContext";
 
 interface FooterProps {
   pallete: any;
@@ -11,6 +13,8 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ pallete, isDropdownOpen }) => {
+  const { language } = useGlobalContext();
+
   const darkFooterPalette = pallete
     ? {
         color: "#FAFBF9",
@@ -19,6 +23,7 @@ const Footer: React.FC<FooterProps> = ({ pallete, isDropdownOpen }) => {
       }
     : {};
 
+  console.log(language);
   return (
     <footer style={{ ...darkFooterPalette }}>
       <Link
@@ -26,7 +31,8 @@ const Footer: React.FC<FooterProps> = ({ pallete, isDropdownOpen }) => {
         className="footer-link"
         to="/"
       >
-        {pallete ? <InvertedLogo /> : <Logo />}
+        {language === "en" ? pallete ? <InvertedLogo /> : <Logo /> : null}
+        {language === "jp" ? pallete ? <InvertedLogoJp /> : <LogoJp /> : null}
       </Link>
     </footer>
   );

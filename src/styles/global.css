@@ -27,7 +27,7 @@
   4. Improve text rendering
 */
 body {
-  line-height: 1.5;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -121,7 +121,7 @@ ul {
     font-size: min(max(1.5rem, 3vw), 2.4em);
 
     margin-bottom: 1.6rem;
-    line-height: 1.2;
+    line-height: 1;
   }
 }
 
@@ -218,37 +218,47 @@ footer > a > svg {
 
 .navbar {
   font-family: "ChromasT_Bold";
-  padding: 1rem 0.25rem 0.5rem 0.25rem;
+  padding: 1rem 0.25rem 0.75rem 0.25rem;
   color: #c8c9c2;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  text-align: center;
-  flex: 1;
-  z-index: 1000;
+  justify-content: flex-start;
+  align-items: center;
   position: relative;
+  z-index: 10000;
 }
 
 .center-links {
+  text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.navbar a {
-  text-decoration: none;
-  margin: 0 25px;
-  text-transform: uppercase;
+  margin-right: auto;
 }
 
 .language-toggle {
-  margin-left: 22.5px;
-  margin-right: 20px;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.navbar a {
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 15px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 767px) {
+  .language-toggle {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+  .center-links {
+    position: absolute;
+    flex: 0 1 auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .navbar a {
+    margin: 0 25px;
+  }
 }
 
 a.language-label {
@@ -263,6 +273,7 @@ a.language-label {
 a.label-jp {
   font-size: 0.8rem;
   margin-bottom: 0.15rem;
+  font-weight: 700;
 }
 
 .dropdown-container {
@@ -334,6 +345,7 @@ a.langActive {
   text-transform: initial;
   font-family: "GaramondNarrowC";
   line-height: 1.2;
+  font-size: 1.75rem;
 }
 
 .jp-font .roterItemsList > li > a {
@@ -341,11 +353,8 @@ a.langActive {
 }
 
 @media (min-width: 767px) {
-  .roterItemsList > li > a {
-    font-size: 1.6rem;
-  }
   .roterItemsList > li:first-child {
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
   }
 }
 
@@ -396,7 +405,7 @@ header {
 }
 
 .center-links,
-.lanuguag-toggle {
+.lanuguage-toggle {
   font-size: 1rem;
 }
 
@@ -405,7 +414,7 @@ header {
   padding-bottom: 1rem;
 }
 
-.page-container__home > p,
+.page-container___home > p,
 .page-container > p {
   font-size: 1.375rem;
   font-weight: 500;
@@ -427,7 +436,7 @@ header {
     height: 80vh;
   }
   .center-links,
-  .lanuguag-toggle {
+  .lanuguage-toggle {
     font-size: 1rem;
   }
 
@@ -445,7 +454,7 @@ header {
 
 @media (min-width: 1280px) {
   .center-links,
-  .lanuguag-toggle {
+  .lanuguage-toggle {
     font-size: 1.1rem;
   }
 

@@ -69,10 +69,16 @@ export const Head: HeadFC = () => (
         "CHORUS is a new ecosystem dedicated to uplifting and connecting Asian music and culture with the world. Founded by renowned Asian executives, CHORUS strives to support Asian artists and their teams to achieve true resonance worldwide. Our vision is to advance the representation and celebration of Asian music from across the continent and diaspora, and elevate its place on the global stage."
       }
     />
+    <meta name="theme-color" content="#e8e9e1" />
+
     <meta
       property="og:image"
       content={"https://venerable-blini-d2f5ee.netlify.app/Share.png"}
     />
     <meta name="pinterest-rich-pin" content="false" />
+    <link
+      rel="apple-touch-icon"
+      href="https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"
+    />
   </>
 );

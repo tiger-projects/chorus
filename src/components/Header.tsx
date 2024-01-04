@@ -17,11 +17,7 @@ interface HeaderProps {
   setActiveLink: (link: string) => void;
   rosterItems: any;
   extractedRosterItems: any;
-  ref: any;
-}
-interface FeaturedImage {
-  id: string;
-  gatsbyImageData: any;
+  footerHeight: number;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -34,10 +30,8 @@ const Header: React.FC<HeaderProps> = ({
   activeLink,
   setActiveLink,
   rosterItems,
-  extractedRosterItems,
-  ref,
 }) => {
-  const { language, getTranslation } = useGlobalContext();
+  const { getTranslation } = useGlobalContext();
   const pageWrapRef = useRef<HTMLDivElement>(null);
 
   const handleMouseWheel = (event: any) => {
@@ -63,30 +57,7 @@ const Header: React.FC<HeaderProps> = ({
     };
   };
 
-  const getFeaturedImage = (title: string): FeaturedImage | null => {
-    const selectedItem = extractedRosterItems.find(
-      (item: any) => item.englishProjectTitle === title
-    );
-
-    if (selectedItem) {
-      const { id, featuredImage } = selectedItem;
-      const gatsbyImageData = featuredImage?.asset.gatsbyImageData;
-
-      if (gatsbyImageData) {
-        return { id, gatsbyImageData };
-      }
-    }
-
-    return null;
-  };
-
-  const displayedImage = hoveredProjectTitle
-    ? getFeaturedImage(hoveredProjectTitle)
-    : null;
-
   const darkPaletteStyle = pallete ? { filter: "invert(100%)" } : {};
-
-  const darkImage = pallete ? { filter: "brightness(50%)" } : {};
 
   return (
     <header>
@@ -136,29 +107,6 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
       </div>
-      {displayedImage && (
-        <div
-          ref={ref}
-          className="roster-image-motion-container"
-          style={darkImage}
-        >
-          <motion.div
-            className="roster-image-container"
-            key={displayedImage.id}
-            exit={{ opacity: 0 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.5, ease: "easeIn" }}
-          >
-            <GatsbyImage
-              className="roster-image"
-              image={displayedImage.gatsbyImageData}
-              alt="Featured image"
-              objectFit="contain"
-            />
-          </motion.div>
-        </div>
-      )}
     </header>
   );
 };

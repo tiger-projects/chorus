@@ -29,7 +29,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                       dangerouslySetInnerHTML={{
                         __html: text[key].replace(
                           /info@chorus.asia/gi,
-                          '<a class="contact_page__links"  href="info@chorus.asia" target="_blank" rel="noopener noreferrer">info@chorus.asia</a>'
+                          '<a class="contact_page__links"   href="mailto:info@chorus.asia" target="_blank" rel="noopener noreferrer">info@chorus.asia</a>'
                         ),
                       }}
                     ></span>

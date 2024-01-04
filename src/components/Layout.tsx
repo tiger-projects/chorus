@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { useGlobalContext } from "../context/languageContext";
 import { motion } from "framer-motion";
 import { useWindowSize } from "react-use";
 import Footer from "./Footer";
 import Header from "./Header";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 interface LayoutProps {
   title: string;
@@ -14,7 +15,13 @@ interface LayoutProps {
   overflow?: boolean;
 }
 
+interface FeaturedImage {
+  id: string;
+  gatsbyImageData: any;
+}
+
 const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
+  const [footerHeight, setFooterHeight] = useState(0);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const { language } = useGlobalContext();
   const [hoveredProjectTitle, setHoveredProjectTitle] = useState<string | null>(
@@ -74,6 +81,23 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
     };
   });
 
+  const getFeaturedImage = (title: string): FeaturedImage | null => {
+    const selectedItem = extractedRosterItems.find(
+      (item: any) => item.englishProjectTitle === title
+    );
+
+    if (selectedItem) {
+      const { id, featuredImage } = selectedItem;
+      const gatsbyImageData = featuredImage?.asset.gatsbyImageData;
+
+      if (gatsbyImageData) {
+        return { id, gatsbyImageData };
+      }
+    }
+
+    return null;
+  };
+
   const getPalette = (title: string) => {
     const selectedItem = extractedRosterItems.find(
       (item: any) =>
@@ -88,6 +112,17 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
     ? { backgroundColor: "rgba(107, 110, 105, 0.7)" }
     : { backgroundColor: "#e8e9e1" };
 
+  const displayedImage = hoveredProjectTitle
+    ? getFeaturedImage(hoveredProjectTitle)
+    : null;
+
+  const darkImage = pallete ? { filter: "brightness(50%)" } : {};
+
+  const linkStyle = {
+    background: isDropdownOpen ? "transparent" : "#e8e9e1",
+    height: `calc(100vh - ${footerHeight}px)`,
+    ...darkImage,
+  };
   return (
     <motion.div
       ref={ref}
@@ -97,7 +132,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
       }`}
     >
       <Header
-        ref={ref}
+        footerHeight={footerHeight}
         rosterItems={rosterItems}
         extractedRosterItems={extractedRosterItems}
         activeLink={activeLink}
@@ -109,7 +144,27 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
         hoveredProjectTitle={hoveredProjectTitle}
         currentPath={currentPath}
       />
+      {displayedImage && (
+        <div className="roster-image-motion-container" style={linkStyle}>
+          <motion.div
+            className="roster-image-container"
+            key={displayedImage.id}
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1, duration: 0.5, ease: "easeIn" }}
+          >
+            <GatsbyImage
+              className="roster-image"
+              image={displayedImage.gatsbyImageData}
+              alt="Featured image"
+              objectFit="contain"
+            />
+          </motion.div>
+        </div>
+      )}
       <motion.main
+        style={{ height: `calc(100vh - ${footerHeight}px - 44px)` }}
         key={currentPath}
         exit={{ opacity: 0, filter: "blur(0px)" }}
         initial={{ opacity: 0, filter: "blur(10px)" }}
@@ -123,6 +178,8 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
         {!isDropdownOpen && children}
       </motion.main>
       <Footer
+        footerHeight={footerHeight}
+        setFooterHeight={setFooterHeight}
         currentPath={currentPath}
         pallete={pallete}
         isDropdownOpen={isDropdownOpen}

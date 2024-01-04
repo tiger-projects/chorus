@@ -22,9 +22,8 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         start_url: "/",
-        background_color: "#6b37bf",
-        theme_color: "#6b37bf",
-
+        background_color: "#e8e9e1",
+        theme_color: "#e8e9e1",
         display: "standalone",
         icon: "src/images/chorus-icon.png",
       },

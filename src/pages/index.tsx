@@ -36,7 +36,6 @@ export const Head: HeadFC = () => (
       href="https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"
     />
     <meta property="og:title" content="Chorus" />
-    <meta name="theme-color" content="#e8e9e1" />
     <meta
       property="og:description"
       content="CHORUS is a ecosystem dedicated to uplifting and connecting Asian music and culture with the world. Founded by renowned Asian executives, CHORUS strives to support Asian artists and their teams to achieve true resonance worldwide."

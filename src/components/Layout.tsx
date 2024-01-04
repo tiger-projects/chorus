@@ -42,7 +42,6 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
             node {
               id
               englishProjectTitle
-              japaneseProjectTitle
               darkPalette
               featuredImage {
                 asset {
@@ -66,17 +65,10 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
   const currentPath = location?.pathname;
 
   const extractedRosterItems = rosterItems.map((item: any) => {
-    const {
-      id,
-      englishProjectTitle,
-      japaneseProjectTitle,
-      featuredImage,
-      darkPalette,
-    } = item.node;
+    const { id, englishProjectTitle, featuredImage, darkPalette } = item.node;
     return {
       id,
       englishProjectTitle,
-      japaneseProjectTitle,
       featuredImage,
       darkPalette,
     };
@@ -84,11 +76,8 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
 
   const getPalette = (title: string) => {
     const selectedItem = extractedRosterItems.find(
-      language === "en"
-        ? (item: any) =>
-            item.darkPalette !== true && item.englishProjectTitle === title
-        : (item: any) =>
-            item.darkPalette !== true && item.japaneseProjectTitle === title
+      (item: any) =>
+        item.darkPalette !== true && item.englishProjectTitle === title
     );
     return selectedItem;
   };

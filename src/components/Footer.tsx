@@ -23,7 +23,6 @@ const Footer: React.FC<FooterProps> = ({ pallete, isDropdownOpen }) => {
       }
     : {};
 
-  console.log(language);
   return (
     <footer style={{ ...darkFooterPalette }}>
       <Link

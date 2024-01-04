@@ -2,19 +2,20 @@ import React from "react";
 import { useGlobalContext } from "../context/languageContext";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface Translation {
-  en: Record<string, string>;
-  jp: Record<string, string>;
-}
-
 interface DropdownProps {
-  rosterItems: any;
+  rosterItems: { [key: string]: RosterItem };
   isDropdownOpen: boolean;
   setDropdownOpen: (isOpen: boolean) => void;
   hoveredProjectTitle: string | null;
   currentPath: string;
   setHoveredProjectTitle: (title: string | null) => void;
   darkPaletteStyle: any;
+}
+
+interface RosterItem {
+  node: {
+    englishProjectTitle: string;
+  };
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -31,28 +32,6 @@ const Dropdown: React.FC<DropdownProps> = ({
     setDropdownOpen(!isDropdownOpen);
   };
 
-  //Create translation object for all roster items
-  const translation: Translation = Object.values(
-    rosterItems
-  ).reduce<Translation>(
-    (result, item: any, index: number) => {
-      const { englishProjectTitle, japaneseProjectTitle } = item.node;
-
-      // Add English translation
-      result.en = result.en || {};
-      result.en[`item${index + 1}`] = englishProjectTitle;
-
-      // Add Japanese translation
-      if (japaneseProjectTitle !== null) {
-        result.jp = result.jp || {};
-        result.jp[`item${index + 1}`] = japaneseProjectTitle;
-      }
-
-      return result;
-    },
-    { en: {}, jp: {} }
-  );
-
   const handleMouseEnter = (title: string) => {
     setHoveredProjectTitle(title);
   };
@@ -61,23 +40,21 @@ const Dropdown: React.FC<DropdownProps> = ({
     setHoveredProjectTitle(null);
   };
 
-  const rosterItemsSelectedLang = translation[language];
-
-  const itemList = Object.entries(rosterItemsSelectedLang).map(
-    ([key, value], index) => {
-      return (
-        <motion.li
-          whileHover={{ scale: 1.1, transition: { duration: 0.5 } }}
-          whileTap={{ scale: 0.9 }}
-          key={index}
-          onMouseEnter={() => handleMouseEnter(value)}
-          onMouseLeave={() => handleMouseLeave()}
-        >
-          <a href="#">{value}</a>
-        </motion.li>
-      );
-    }
-  );
+  const itemList = Object.entries(rosterItems).map(([key, value], index) => {
+    return (
+      <motion.li
+        whileHover={{ scale: 1.1, transition: { duration: 0.5 } }}
+        whileTap={{ scale: 0.9 }}
+        key={index}
+        onMouseEnter={() =>
+          handleMouseEnter((value as any).node.englishProjectTitle)
+        }
+        onMouseLeave={() => handleMouseLeave()}
+      >
+        <a href="#">{value.node.englishProjectTitle}</a>
+      </motion.li>
+    );
+  });
 
   return (
     <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>

@@ -3,7 +3,7 @@ import { Translations } from "../types/types";
 export const translations: Translations = {
   en: {
     nav_link_one: "mission",
-    nav_link_two: "roster",
+    nav_link_two: "clients",
     nav_link_three: "contact",
     footer_logo_text:
       "(noun)  / Part of a song recurring between verses  / Group of backing vocalists supporting the lead singer",
@@ -15,13 +15,14 @@ export const translations: Translations = {
       "As a growing team of leaders and experts in music, CHORUS rallies the unmatched insight, expertise and passion of our alliance towards our mission – to champion Asian music and culture, and empower Asian artists, teams and labels to participate in the success, development and growth of Asian music around the world.",
     ],
     contact_text: [
-      "For further enquiries and to request additional details, please email: info@chorus.asia",
-      "    Follow us on Instagram and LinkedIn",
+      "For further enquiries and to request additional details, please email:",
+      "info@chorus.asia",
+      "Follow us on Instagram and LinkedIn",
     ],
   },
   jp: {
     nav_link_one: "mission",
-    nav_link_two: "roster",
+    nav_link_two: "clients",
     nav_link_three: "contact",
     footer_logo_text:
       "(noun)  / Part of a song recurring between verses  / Group of backing vocalists supporting the lead singer",
@@ -33,8 +34,10 @@ export const translations: Translations = {
       "アジア音楽界のリーダーや専門家で構成され、規模を拡大させているChorusは、チーム一丸となって目指すミッションのために比類ない洞察力、専門知識、情熱を結集させます - 私たちのミッションは、アジアの音楽と文化のために闘い、アジア系アーティスト、チーム、レーベルをエンパワーし、世界中でアジア音楽の成功、発展、成長へ貢献することです。",
     ],
     contact_text: [
-      "For further enquiries and to request additional details, please email: info@chorus.asia",
-      "    Follow us on Instagram and LinkedIn",
+      "お問い合わせやその他詳細をご希望の方は",
+      "info@chorus.asiaまでご連絡ください。",
+
+      "Follow us on Instagram and LinkedIn.",
     ],
   },
 };

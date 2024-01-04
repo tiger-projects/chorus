@@ -63,9 +63,7 @@ const Header: React.FC<HeaderProps> = ({
 
   const getFeaturedImage = (title: string): FeaturedImage | null => {
     const selectedItem = extractedRosterItems.find(
-      (item: any) =>
-        (language === "en" && item.englishProjectTitle === title) ||
-        (language === "jp" && item.japaneseProjectTitle === title)
+      (item: any) => item.englishProjectTitle === title
     );
 
     if (selectedItem) {

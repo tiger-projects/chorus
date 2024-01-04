@@ -359,6 +359,16 @@ a.langActive {
   align-items: center;
 }
 
+.roster-image-container {
+  height: auto;
+}
+
+@media only screen and (min-width: 900px) {
+  .roster-image-container {
+    height: 100%;
+  }
+}
+
 /* .roster-image {
   position: absolute;
   left: 50%;

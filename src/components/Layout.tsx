@@ -6,6 +6,7 @@ import { useWindowSize } from "react-use";
 import Footer from "./Footer";
 import Header from "./Header";
 import { GatsbyImage } from "gatsby-plugin-image";
+import styled from "styled-components";
 
 interface LayoutProps {
   title: string;
@@ -18,6 +19,11 @@ interface LayoutProps {
 interface FeaturedImage {
   id: string;
   gatsbyImageData: any;
+}
+
+interface LinkStyleProps {
+  isDropdownOpen: boolean;
+  palette?: boolean;
 }
 
 const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
@@ -109,20 +115,27 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
   const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
 
   const darkPaletteBackground = pallete
-    ? { backgroundColor: "rgba(107, 110, 105, 0.7)" }
+    ? { backgroundColor: "rgba(85, 88, 83, 0.9)" }
     : { backgroundColor: "#e8e9e1" };
 
   const displayedImage = hoveredProjectTitle
     ? getFeaturedImage(hoveredProjectTitle)
     : null;
 
-  const darkImage = pallete ? { filter: "brightness(50%)" } : {};
+  const StyledDiv = styled.div<LinkStyleProps>`
+    background: ${(props) =>
+      props.isDropdownOpen ? "transparent" : "#e8e9e1"};
+    height: calc(100vh - ${footerHeight}px);
+    ${(props) =>
+      props.palette &&
+      `filter: brightness(50%);
 
-  const linkStyle = {
-    background: isDropdownOpen ? "transparent" : "#e8e9e1",
-    height: `calc(100vh - ${footerHeight}px)`,
-    ...darkImage,
-  };
+      @media only screen and (min-width: 900px) {
+        height: 100vh;
+      }
+    `}
+  `;
+
   return (
     <motion.div
       ref={ref}
@@ -145,7 +158,11 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
         currentPath={currentPath}
       />
       {displayedImage && (
-        <div className="roster-image-motion-container" style={linkStyle}>
+        <StyledDiv
+          isDropdownOpen={isDropdownOpen}
+          palette
+          className="roster-image-motion-container"
+        >
           <motion.div
             className="roster-image-container"
             key={displayedImage.id}
@@ -155,13 +172,15 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
             transition={{ delay: 0.1, duration: 0.5, ease: "easeIn" }}
           >
             <GatsbyImage
+              style={{ height: "100%" }}
+              imgStyle={{ height: "100%" }}
               className="roster-image"
               image={displayedImage.gatsbyImageData}
               alt="Featured image"
-              objectFit="contain"
+              objectFit="cover"
             />
           </motion.div>
-        </div>
+        </StyledDiv>
       )}
       <motion.main
         style={{ height: `calc(100vh - ${footerHeight}px - 44px)` }}

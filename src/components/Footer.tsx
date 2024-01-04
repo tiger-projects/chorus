@@ -27,7 +27,7 @@ const Footer: React.FC<FooterProps> = ({
   const darkFooterPalette = pallete
     ? {
         color: "#FAFBF9",
-        opacity: 0.8,
+        opacity: 0.5,
         filter: "invert(100%) brightness(100%)",
       }
     : {};
@@ -36,7 +36,6 @@ const Footer: React.FC<FooterProps> = ({
     const getLinkSize = () => {
       if (linkRef.current) {
         const linkSize = linkRef.current.getBoundingClientRect();
-        console.log("Link height:", linkSize.height);
         setFooterHeight(linkSize.height);
       }
     };

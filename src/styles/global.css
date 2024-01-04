@@ -349,14 +349,13 @@ a.langActive {
   }
 }
 
-.roster-image-container {
-  z-index: -1;
+.roster-image-motion-container {
+  position: relative;
+  min-height: calc(100vh - 216px);
+  max-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  padding: 0;
-  height: 80vh;
 }
 
 /* .roster-image {

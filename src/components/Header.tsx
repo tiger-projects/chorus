@@ -17,6 +17,7 @@ interface HeaderProps {
   setActiveLink: (link: string) => void;
   rosterItems: any;
   extractedRosterItems: any;
+  ref: any;
 }
 interface FeaturedImage {
   id: string;
@@ -34,6 +35,7 @@ const Header: React.FC<HeaderProps> = ({
   setActiveLink,
   rosterItems,
   extractedRosterItems,
+  ref,
 }) => {
   const { language, getTranslation } = useGlobalContext();
   const pageWrapRef = useRef<HTMLDivElement>(null);
@@ -135,7 +137,11 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
       {displayedImage && (
-        <div className="roster-image-motion-container" style={darkImage}>
+        <div
+          ref={ref}
+          className="roster-image-motion-container"
+          style={darkImage}
+        >
           <motion.div
             className="roster-image-container"
             key={displayedImage.id}
@@ -148,7 +154,7 @@ const Header: React.FC<HeaderProps> = ({
               className="roster-image"
               image={displayedImage.gatsbyImageData}
               alt="Featured image"
-              objectFit="cover"
+              objectFit="contain"
             />
           </motion.div>
         </div>

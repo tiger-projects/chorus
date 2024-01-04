@@ -97,6 +97,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
       }`}
     >
       <Header
+        ref={ref}
         rosterItems={rosterItems}
         extractedRosterItems={extractedRosterItems}
         activeLink={activeLink}

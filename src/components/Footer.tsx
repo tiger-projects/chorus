@@ -25,12 +25,12 @@ const Footer: React.FC<FooterProps> = ({
   const linkRef = useRef<HTMLAnchorElement | null>(null);
 
   const darkFooterPalette = pallete
-    ? {
+    ? {}
+    : {
         color: "#FAFBF9",
-        opacity: 0.5,
+        opacity: 0.9,
         filter: "invert(100%) brightness(100%)",
-      }
-    : {};
+      };
 
   React.useEffect(() => {
     const getLinkSize = () => {
@@ -59,8 +59,7 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <footer style={{ ...darkFooterPalette }}>
       <Link
-        ref={linkRef}
-        style={{ background: isDropdownOpen ? "transparent" : "#e8e9e1" }}
+        // style={{ background: isDropdownOpen ? "transparent" : "#e8e9e1" }}
         className="footer-link"
         to="/"
       >

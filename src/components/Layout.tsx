@@ -24,7 +24,21 @@ interface FeaturedImage {
 interface LinkStyleProps {
   isDropdownOpen: boolean;
   palette?: boolean;
+  footerHeight: number;
 }
+
+const StyledDiv = styled.div<LinkStyleProps>`
+  background: ${(props) => (props.isDropdownOpen ? "transparent" : "#e8e9e1")};
+  height: calc(100vh - ${(props) => props.footerHeight}px);
+  ${(props) =>
+    props.palette &&
+    `filter: brightness(50%);
+
+      @media only screen and (min-width: 900px) {
+        height: 100vh;
+      }
+    `}
+`;
 
 const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
   const [footerHeight, setFooterHeight] = useState(0);
@@ -122,19 +136,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
     ? getFeaturedImage(hoveredProjectTitle)
     : null;
 
-  const StyledDiv = styled.div<LinkStyleProps>`
-    background: ${(props) =>
-      props.isDropdownOpen ? "transparent" : "#e8e9e1"};
-    height: calc(100vh - ${footerHeight}px);
-    ${(props) =>
-      props.palette &&
-      `filter: brightness(50%);
-
-      @media only screen and (min-width: 900px) {
-        height: 100vh;
-      }
-    `}
-  `;
+  console.log(rosterItems);
 
   return (
     <motion.div
@@ -159,6 +161,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
       />
       {displayedImage && (
         <StyledDiv
+          footerHeight={footerHeight}
           isDropdownOpen={isDropdownOpen}
           palette
           className="roster-image-motion-container"

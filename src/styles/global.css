@@ -185,7 +185,10 @@ footer > a {
   transform: translateX(-50%);
   padding: 0.5rem 0.75rem;
   width: 100vw;
-  background: var(--light-grey);
+  background: transparent;
+  /* background: var(--light-grey); */
+  mix-blend-mode: difference;
+  filter: invert(1);
 }
 
 main {

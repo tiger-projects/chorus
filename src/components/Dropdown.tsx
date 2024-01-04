@@ -80,8 +80,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{
             type: "spring",
-            delay: 0.1,
-            duration: 0.4,
+            duration: 0.3,
             ease: "easeIn",
           }}
         >

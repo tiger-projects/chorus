@@ -14,12 +14,7 @@ interface FooterProps {
   setFooterHeight: (height: number) => void;
 }
 
-const Footer: React.FC<FooterProps> = ({
-  pallete,
-  isDropdownOpen,
-  setFooterHeight,
-  footerHeight,
-}) => {
+const Footer: React.FC<FooterProps> = ({ pallete, setFooterHeight }) => {
   const { language } = useGlobalContext();
 
   const linkRef = useRef<HTMLAnchorElement | null>(null);
@@ -59,6 +54,7 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <footer style={{ ...darkFooterPalette }}>
       <Link
+        ref={linkRef}
         // style={{ background: isDropdownOpen ? "transparent" : "#e8e9e1" }}
         className="footer-link"
         to="/"

@@ -136,8 +136,6 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
     ? getFeaturedImage(hoveredProjectTitle)
     : null;
 
-  console.log(rosterItems);
-
   return (
     <motion.div
       ref={ref}
@@ -172,7 +170,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.5, ease: "easeIn" }}
+            transition={{ delay: 0.1, duration: 0.3, ease: "easeIn" }}
           >
             <GatsbyImage
               style={{ height: "100%" }}

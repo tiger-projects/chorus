@@ -28,9 +28,10 @@ interface LinkStyleProps {
 }
 
 const StyledDiv = styled.div<LinkStyleProps>`
-  background: ${(props) => (props.isDropdownOpen ? "transparent" : "#e8e9e1")};
-  height: calc(100vh - ${(props) => props.footerHeight}px);
-  ${(props) =>
+  background: ${(props: any) =>
+    props.isDropdownOpen ? "transparent" : "#e8e9e1"};
+  height: calc(100vh - ${(props: any) => props.footerHeight}px - 44px);
+  ${(props: any) =>
     props.palette &&
     `filter: brightness(50%);
 
@@ -128,6 +129,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
 
   const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
 
+  console.log(pallete);
   const darkPaletteBackground = pallete
     ? { backgroundColor: "rgba(85, 88, 83, 0.9)" }
     : { backgroundColor: "#e8e9e1" };

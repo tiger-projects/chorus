@@ -25,7 +25,7 @@ interface LinkStyleProps {
   isDropdownOpen: boolean;
   palette?: boolean;
   footerHeight: number;
-  height: number'
+  height: number;
 }
 
 const StyledDiv = styled.div<LinkStyleProps>`
@@ -164,7 +164,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
       />
       {displayedImage && (
         <StyledDiv
-        height={height}
+          height={height}
           footerHeight={footerHeight}
           isDropdownOpen={isDropdownOpen}
           palette

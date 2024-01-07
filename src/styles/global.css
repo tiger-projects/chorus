@@ -396,13 +396,7 @@ a.langActive {
 } */
 
 .logo-text {
-  display: none;
-}
-
-@media (min-width: 767px) {
-  .logo-text {
-    display: block;
-  }
+  display: block;
 }
 
 header {

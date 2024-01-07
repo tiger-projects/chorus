@@ -12,26 +12,41 @@ interface FooterProps {
   currentPath?: string;
   footerHeight: number;
   setFooterHeight: (height: number) => void;
+  hoveredProjectTitle: string | null;
+}
+
+interface FooterStyle {
+  mixBlendMode?: string;
+  filter?: string;
+  // Add other properties as needed
 }
 
 const Footer: React.FC<FooterProps> = ({
   pallete,
   setFooterHeight,
-  isDropdownOpen,
+  hoveredProjectTitle,
 }) => {
   const { language } = useGlobalContext();
 
   const linkRef = useRef<HTMLAnchorElement | null>(null);
 
-  console.log(pallete);
+  let footerStyle: FooterStyle = {};
+
+  if (hoveredProjectTitle != null) {
+    footerStyle.mixBlendMode = "initial";
+    // Add other styles to footerStyle if needed
+  } else {
+    footerStyle.mixBlendMode = "difference";
+    footerStyle.filter = "invert(1)";
+  }
   const darkFooterPalette = pallete
     ? {
-        // color: "#FAFBF9",
-        // opacity: 0.9,
-        // filter: "invert(100%) brightness(100%)",
+        color: "#FAFBF9",
+        opacity: 0.9,
+        filter: "invert(100%) brightness(100%)",
       }
     : {
-        // color: "#FAFBF9",
+        color: "#FAFBF9",
       };
 
   React.useEffect(() => {
@@ -61,7 +76,7 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <footer style={{ ...darkFooterPalette }}>
       <Link
-        style={{ mixBlendMode: "difference", filter: "invert(1)" }}
+        style={{ ...footerStyle }}
         ref={linkRef}
         // style={{ background: isDropdownOpen ? "transparent" : "#e8e9e1" }}
         className="footer-link"

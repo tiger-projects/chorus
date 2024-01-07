@@ -74,6 +74,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       </motion.a>
       {isDropdownOpen && (
         <motion.div
+          className-=""
           key="dropdown"
           exit={{ opacity: 0, filter: "blur(10px)" }}
           initial={{ opacity: 0, filter: "blur(0px)" }}

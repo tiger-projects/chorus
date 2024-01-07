@@ -13,7 +13,7 @@ const IndexPage: React.FC<PageProps> = ({ data, location }) => {
       title={"Chorus Homepage"}
       description="Chorus description"
     >
-      <div className="page-container___home">
+      <div className="page-container__home">
         <p>{getTranslation("home_text")}</p>
       </div>
     </Layout>

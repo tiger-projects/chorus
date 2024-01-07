@@ -304,16 +304,15 @@ a.langActive {
   margin-bottom: 3rem;
 }
 
-.page-container___home {
+.page-container__home {
   grid-column: 1/13;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-bottom: 3rem;
 }
-.page-container___home p {
+.page-container__home p {
   margin-bottom: 0;
 }
 
@@ -421,7 +420,7 @@ header {
   padding-bottom: 1rem;
 }
 
-.page-container___home > p,
+.page-container__home > p,
 .page-container > p {
   font-size: 1.375rem;
   font-weight: 500;

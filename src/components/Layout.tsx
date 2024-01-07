@@ -129,7 +129,6 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
 
   const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
 
-  console.log(pallete);
   const darkPaletteBackground = pallete
     ? { backgroundColor: "rgba(85, 88, 83, 0.9)" }
     : { backgroundColor: "#e8e9e1" };
@@ -205,6 +204,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
         currentPath={currentPath}
         pallete={pallete}
         isDropdownOpen={isDropdownOpen}
+        hoveredProjectTitle={hoveredProjectTitle}
       />
     </motion.div>
   );

@@ -32,7 +32,7 @@ const StyledDiv = styled.div<LinkStyleProps>`
   background: ${(props: any) =>
     props.isDropdownOpen ? "transparent" : "#e8e9e1"};
   height: calc(
-    ${(props: any) => props.footer} - ${(props: any) => props.footerHeight}px -
+    ${(props: any) => props.height}px - ${(props: any) => props.footerHeight}px -
       44px
   );
   ${(props: any) =>

@@ -25,12 +25,16 @@ interface LinkStyleProps {
   isDropdownOpen: boolean;
   palette?: boolean;
   footerHeight: number;
+  height: number'
 }
 
 const StyledDiv = styled.div<LinkStyleProps>`
   background: ${(props: any) =>
     props.isDropdownOpen ? "transparent" : "#e8e9e1"};
-  height: calc(100vh - ${(props: any) => props.footerHeight}px - 44px);
+  height: calc(
+    ${(props: any) => props.footer} - ${(props: any) => props.footerHeight}px -
+      44px
+  );
   ${(props: any) =>
     props.palette &&
     `filter: brightness(50%);
@@ -160,6 +164,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
       />
       {displayedImage && (
         <StyledDiv
+        height={height}
           footerHeight={footerHeight}
           isDropdownOpen={isDropdownOpen}
           palette

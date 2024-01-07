@@ -160,6 +160,7 @@ html {
     "main"
     "footer";
   overflow: hidden;
+  position: relative;
 }
 
 .app > header {
@@ -362,6 +363,9 @@ a.langActive {
 
 .roster-image-container {
   height: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 @media only screen and (min-width: 900px) {

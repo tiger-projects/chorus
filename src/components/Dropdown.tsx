@@ -43,8 +43,9 @@ const Dropdown: React.FC<DropdownProps> = ({
   const itemList = Object.entries(rosterItems).map(([key, value], index) => {
     return (
       <motion.li
-        whileHover={{ scale: 1.1, transition: { duration: 0.5 } }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ color: "#fff", transition: { duration: 0.5 } }}
+        whileTap={{ color: "#fff" }}
+        initial={{ color: "#c8c9c2" }}
         key={index}
         onMouseEnter={() =>
           handleMouseEnter((value as any).node.englishProjectTitle)

@@ -31,7 +31,7 @@ export const Head: HeadFC = () => (
         "CHORUS is a ecosystem dedicated to uplifting and connecting Asian music and culture with the world. Founded by renowned Asian executives, CHORUS strives to support Asian artists and their teams to achieve true resonance worldwide."
       }
     />
-    <link rel="apple-touch-icon" sizes="200x200" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link
       rel="apple-touch-icon-precomposed"
       href="https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"

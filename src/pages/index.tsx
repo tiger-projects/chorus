@@ -33,6 +33,7 @@ export const Head: HeadFC = () => (
     />
     <link
       rel="apple-touch-icon"
+      sizes="200x200"
       href="https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"
     />
     <link

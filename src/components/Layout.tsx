@@ -134,7 +134,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
   const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
 
   const darkPaletteBackground = pallete
-    ? { backgroundColor: "rgba(85, 88, 83, 0.9)" }
+    ? { backgroundColor: "#6B6E69" }
     : { backgroundColor: "#e8e9e1" };
 
   const displayedImage = hoveredProjectTitle
@@ -180,8 +180,8 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
           >
             <GatsbyImage
               style={{ height: "100%" }}
-              imgStyle={{ height: "100%" }}
-              className="roster-image"
+              imgStyle={{ height: "100%", mixBlendMode: "multiply" }}
+              className={`roster-image ${pallete ? "dark" : "light"}`}
               image={displayedImage.gatsbyImageData}
               alt="Featured image"
               objectFit="cover"

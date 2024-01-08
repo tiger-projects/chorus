@@ -75,7 +75,7 @@ export const Head: HeadFC = () => (
     />
     <meta
       property="og:image"
-      content={"https://venerable-blini-d2f5ee.netlify.app/Share.png"}
+      content={"https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"}
     />
     <meta name="pinterest-rich-pin" content="false" />
     <link

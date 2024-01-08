@@ -338,16 +338,34 @@ a.langActive {
   text-align: center;
   text-transform: initial;
   font-family: "GaramondNarrowC";
-  line-height: 1.2;
+  line-height: 1.1;
   font-size: 1.75rem;
+  color: initial;
 }
 
-.jp-font .roterItemsList > li > a {
-  font-family: "Noto Serif JP", sans-serif;
+.roterItemsList > li > a.roster-list-items-hovered {
+  color: #6b6e69;
+}
+.roterItemsList > li > a.roster-list-items-project-hovered {
+  color: #000;
 }
 
 .roterItemsList > li:first-child {
   margin-top: 0.75rem;
+}
+
+@media (min-width: 1280px) {
+  .roterItemsList > li > a {
+    font-size: 2.6rem;
+    line-height: 1.1;
+  }
+  .roterItemsList > li:first-child {
+    margin-top: 1.25rem;
+  }
+}
+
+.jp-font .roterItemsList > li > a {
+  font-family: "Noto Serif JP", sans-serif;
 }
 
 .roster-image-motion-container {
@@ -376,15 +394,16 @@ a.langActive {
   }
 }
 
-/* .roster-image {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
+.roster-image.light {
+  background: #e8e9e1;
+  opacity: 0.9;
 }
 
-@media (min-width: 767px) {
+.roster-image.dark {
+  background: var(--concrete-gray);
+}
+
+/* @media (min-width: 767px) {
   .roster-image {
     position: absolute;
     left: 50%;
@@ -392,7 +411,7 @@ a.langActive {
     transform: translate(-50%, -50%);
     width:
   }
-} */
+}  */
 
 .logo-text {
   display: block;
@@ -454,7 +473,7 @@ header {
 
   .page-container__home > p,
   .page-container > p {
-    font-size: 2.375rem;
+    font-size: 2.6rem;
     font-weight: 500;
     color: #000;
   }

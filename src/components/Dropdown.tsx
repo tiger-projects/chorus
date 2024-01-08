@@ -22,6 +22,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   rosterItems,
   isDropdownOpen,
   setDropdownOpen,
+  hoveredProjectTitle,
   setHoveredProjectTitle,
   currentPath,
   darkPaletteStyle,
@@ -40,11 +41,13 @@ const Dropdown: React.FC<DropdownProps> = ({
     setHoveredProjectTitle(null);
   };
 
+  console.log(hoveredProjectTitle);
+
   const itemList = Object.entries(rosterItems).map(([key, value], index) => {
     return (
       <motion.li
-        whileHover={{ color: "#fff", transition: { duration: 0.5 } }}
-        whileTap={{ color: "#fff" }}
+        whileHover={{ color: "#000", transition: { duration: 0.5 } }}
+        whileTap={{ color: "#000" }}
         initial={{ color: "#c8c9c2" }}
         key={index}
         onMouseEnter={() =>
@@ -52,7 +55,18 @@ const Dropdown: React.FC<DropdownProps> = ({
         }
         onMouseLeave={() => handleMouseLeave()}
       >
-        <a href="#">{value.node.englishProjectTitle}</a>
+        <a
+          className={`${
+            hoveredProjectTitle === value.node.englishProjectTitle
+              ? "roster-list-items-project-hovered"
+              : hoveredProjectTitle !== null
+              ? "roster-list-items-hovered"
+              : ""
+          }`}
+          href="#"
+        >
+          {value.node.englishProjectTitle}
+        </a>{" "}
       </motion.li>
     );
   });
@@ -75,7 +89,6 @@ const Dropdown: React.FC<DropdownProps> = ({
       </motion.a>
       {isDropdownOpen && (
         <motion.div
-          className-=""
           key="dropdown"
           exit={{ opacity: 0, filter: "blur(10px)" }}
           initial={{ opacity: 0, filter: "blur(0px)" }}

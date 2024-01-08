@@ -35,6 +35,10 @@ export const Head: HeadFC = () => (
       rel="apple-touch-icon"
       href="https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"
     />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"
+    />
     <meta property="og:title" content="Chorus" />
     <meta
       property="og:description"
@@ -42,7 +46,7 @@ export const Head: HeadFC = () => (
     />
     <meta
       property="og:image"
-      content={"https://venerable-blini-d2f5ee.netlify.app/Thumbnail.png"}
+      content={"https://venerable-blini-d2f5ee.netlify.app/Share.png"}
     />
     <meta name="pinterest-rich-pin" content="false" />
   </>

@@ -41,8 +41,6 @@ const Dropdown: React.FC<DropdownProps> = ({
     setHoveredProjectTitle(null);
   };
 
-  console.log(hoveredProjectTitle);
-
   const itemList = Object.entries(rosterItems).map(([key, value], index) => {
     return (
       <motion.li

@@ -42,7 +42,7 @@ const Footer: React.FC<FooterProps> = ({
   const darkFooterPalette = pallete
     ? {
         color: "#FAFBF9",
-        opacity: 0.7,
+        opacity: 0.8,
         filter: "invert(100%) brightness(100%)",
       }
     : {

@@ -425,12 +425,12 @@ a.langActive {
 }
 
 .roster-image.light {
-  background: #e8e9e1;
+  /* background: #e8e9e1; */
   opacity: 0.9;
 }
 
 .roster-image.dark {
-  background: var(--concrete-gray);
+  /* background: var(--concrete-gray); */
 }
 
 /* @media (min-width: 767px) {

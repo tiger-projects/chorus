@@ -37,7 +37,7 @@ const StyledDiv = styled.div<LinkStyleProps>`
   );
   ${(props: any) =>
     props.palette &&
-    `filter: brightness(50%);
+    `mix-blend-mode: multiply;
 
       @media only screen and (min-width: 900px) {
         height: 100vh;
@@ -135,7 +135,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
 
   const darkPaletteBackground = pallete
     ? {
-        backgroundColor: "#6B6E69",
+        backgroundColor: "#555853",
       }
     : {
         backgroundColor: "#e8e9e1",

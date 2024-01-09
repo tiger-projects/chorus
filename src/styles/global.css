@@ -465,10 +465,6 @@ header {
   color: #000;
 }
 
-.page-container__home {
-  height: 100vh;
-}
-
 .page-container > p {
   margin-bottom: 1.75rem;
 }

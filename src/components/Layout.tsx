@@ -14,6 +14,7 @@ interface LayoutProps {
   children: React.ReactNode;
   location?: Location;
   overflow?: boolean;
+  index?: boolean;
 }
 
 interface FeaturedImage {
@@ -45,7 +46,12 @@ const StyledDiv = styled.div<LinkStyleProps>`
     `}
 `;
 
-const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
+const Layout: React.FC<LayoutProps> = ({
+  location,
+  children,
+  overflow,
+  index,
+}) => {
   const [footerHeight, setFooterHeight] = useState(0);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const { language } = useGlobalContext();
@@ -186,8 +192,6 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
     );
   });
 
-  console.log(overflow === true);
-
   return (
     <motion.div
       ref={ref}
@@ -239,7 +243,9 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
       )}
       <motion.main
         style={{
-          height: `calc(100vh - ${footerHeight}px - 44px - 1.5rem)`,
+          height: index
+            ? "100vh - 50px"
+            : `calc(100vh - ${footerHeight}px - 44px - 1.5rem)`,
         }}
         key={(currentPath || "") + isDropdownOpen}
         exit={{ opacity: 0, filter: "blur(0px)" }}

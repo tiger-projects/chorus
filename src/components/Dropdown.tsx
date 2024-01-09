@@ -30,7 +30,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   const handleDropdownToggle = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-  console.log(currentPath);
+
   return (
     <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
       <motion.a

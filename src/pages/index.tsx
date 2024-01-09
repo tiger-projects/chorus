@@ -9,6 +9,7 @@ const IndexPage: React.FC<PageProps> = ({ data, location }) => {
 
   return (
     <Layout
+      index={true}
       location={location}
       title={"Chorus Homepage"}
       description="Chorus description"

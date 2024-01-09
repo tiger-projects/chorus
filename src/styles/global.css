@@ -318,7 +318,6 @@ a.langActive {
 
 .page-container {
   grid-column: 1/13;
-  margin-bottom: 3rem;
 }
 
 .page-container__home {

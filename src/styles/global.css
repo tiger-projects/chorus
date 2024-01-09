@@ -166,6 +166,7 @@ html {
     "main"
     "footer";
   position: relative;
+  overflow: hidden;
 }
 
 .app > header {
@@ -520,8 +521,8 @@ header {
   color: #c8c9c2;
 }
 
-.overflow-scroll {
-  overflow-y: auto;
+.app.overflow-scroll {
+  overflow: auto;
 }
 
 .contact-text:first-of-type {

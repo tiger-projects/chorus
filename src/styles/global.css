@@ -362,8 +362,7 @@ a.langActive {
   color: #6b6e69;
 }
 .roterItemsList > li > a.roster-list-items-hovered.light {
-  color: #e8e9e1;
-  opacity: 0.5;
+  color: #f7f8ed;
 }
 .roterItemsList > li > a.roster-list-items-project-hovered.light {
   color: #000;

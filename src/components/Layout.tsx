@@ -218,12 +218,13 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
           <motion.div
             className="roster-image-container"
             key={displayedImage.id}
-            exit={{ opacity: 0 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.5, ease: "easeIn" }}
+            exit={{ opacity: 0, filter: "blur(100px)" }}
+            initial={{ opacity: 0, filter: "blur(100px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ ease: "circInOut", duration: 0.6 }}
           >
             <GatsbyImage
+              key={displayedImage.id}
               style={{ height: "100%" }}
               imgStyle={{ height: "100%", mixBlendMode: "multiply" }}
               className={`roster-image ${pallete ? "dark" : "light"}`}

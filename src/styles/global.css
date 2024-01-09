@@ -2,6 +2,10 @@
   display: none;
 }
 
+:root {
+  --r: 0%;
+}
+
 /*
   1. Use a more-intuitive box-sizing model.
 */

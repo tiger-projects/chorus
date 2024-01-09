@@ -43,8 +43,11 @@ const Dropdown: React.FC<DropdownProps> = ({
         initial={{ color: "#c8c9c2" }}
         animate={{
           color: currentPath === "/" || isDropdownOpen ? "#fff" : "#c8c9c2",
-          filter:
-            currentPath === "/" || isDropdownOpen ? "invert(0)" : "invert(1)",
+          filter: isDropdownOpen
+            ? "invert(1)"
+            : currentPath === "/"
+            ? "invert(0)"
+            : "invert(1)",
 
           transition: { delay: 0.1, duration: 0.3, ease: "easeInOut" },
         }}

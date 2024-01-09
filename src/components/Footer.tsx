@@ -78,7 +78,6 @@ const Footer: React.FC<FooterProps> = ({
       <Link
         style={{ ...footerStyle }}
         ref={linkRef}
-        // style={{ background: isDropdownOpen ? "transparent" : "#e8e9e1" }}
         className="footer-link"
         to="/"
       >

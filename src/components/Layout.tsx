@@ -186,12 +186,14 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
     );
   });
 
+  console.log(overflow === true);
+
   return (
     <motion.div
       ref={ref}
       style={darkPaletteBackground}
       className={`${language}-font app ${
-        overflow === true ? "overflow-scroll" : ""
+        overflow && !isDropdownOpen ? "overflow-scroll" : ""
       }`}
     >
       <Header

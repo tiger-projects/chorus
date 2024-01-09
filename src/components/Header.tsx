@@ -52,12 +52,17 @@ const Header: React.FC<HeaderProps> = ({
       color: isDropdownOpen
         ? "#c8c9c2"
         : currentPath === path || currentPath === "/"
-        ? "black"
+        ? "white"
         : "#c8c9c2",
+      filter: isDropdownOpen
+        ? "invert(0)"
+        : currentPath === path || currentPath === "/"
+        ? "invert(0)"
+        : "invert(1)",
     };
   };
 
-  const darkPaletteStyle = pallete ? { filter: "invert(100%)" } : {};
+  const darkPaletteStyle = pallete ? {} : {};
 
   return (
     <header>
@@ -70,7 +75,13 @@ const Header: React.FC<HeaderProps> = ({
         ref={pageWrapRef}
         onWheel={handleMouseWheel}
       >
-        <div className="navbar">
+        <div
+          className="navbar"
+          style={{
+            mixBlendMode: isDropdownOpen ? "initial" : "difference",
+            filter: pallete ? "invert(1)" : "invert(0)",
+          }}
+        >
           <div className="center-links">
             <Link
               id="navbar-main--link"
@@ -103,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
           </div>
           <div className="language-toggle">
-            <LanguageToggle />
+            <LanguageToggle isDropdownOpen={isDropdownOpen} />
           </div>
         </div>
       </div>

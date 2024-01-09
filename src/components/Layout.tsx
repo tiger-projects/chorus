@@ -134,12 +134,57 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
   const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
 
   const darkPaletteBackground = pallete
-    ? { backgroundColor: "#6B6E69" }
-    : { backgroundColor: "#e8e9e1" };
+    ? {
+        backgroundColor: "#6B6E69",
+      }
+    : {
+        backgroundColor: "#e8e9e1",
+      };
 
   const displayedImage = hoveredProjectTitle
     ? getFeaturedImage(hoveredProjectTitle)
     : null;
+
+  const handleMouseEnter = (title: string) => {
+    setHoveredProjectTitle(title);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredProjectTitle(null);
+  };
+
+  const itemList = Object.entries(rosterItems).map(([key, value], index) => {
+    return (
+      <motion.li
+        whileHover={{
+          color: pallete ? "#000" : "#000",
+          transition: { duration: 0.5 },
+        }}
+        whileTap={{ color: pallete ? "#000" : "#000" }}
+        initial={{ color: "#c8c9c2" }}
+        key={index}
+        onMouseEnter={() =>
+          handleMouseEnter((value as any).node.englishProjectTitle)
+        }
+        onMouseLeave={() => handleMouseLeave()}
+      >
+        <a
+          className={`${
+            hoveredProjectTitle === (value as any).node.englishProjectTitle
+              ? `roster-list-items-project-hovered ${
+                  pallete ? "dark" : "light"
+                }`
+              : hoveredProjectTitle !== null
+              ? `roster-list-items-hovered ${pallete ? "dark" : "light"}`
+              : ""
+          }`}
+          href="#"
+        >
+          {(value as any).node.englishProjectTitle}
+        </a>{" "}
+      </motion.li>
+    );
+  });
 
   return (
     <motion.div
@@ -176,7 +221,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.3, ease: "easeIn" }}
+            transition={{ delay: 0.1, duration: 0.5, ease: "easeIn" }}
           >
             <GatsbyImage
               style={{ height: "100%" }}
@@ -184,14 +229,14 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
               className={`roster-image ${pallete ? "dark" : "light"}`}
               image={displayedImage.gatsbyImageData}
               alt="Featured image"
-              objectFit="cover"
+              objectFit="contain"
             />
           </motion.div>
         </StyledDiv>
       )}
       <motion.main
         style={{ height: `calc(100vh - ${footerHeight}px - 44px)` }}
-        key={currentPath}
+        key={(currentPath || "") + isDropdownOpen}
         exit={{ opacity: 0, filter: "blur(0px)" }}
         initial={{ opacity: 0, filter: "blur(10px)" }}
         animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -201,6 +246,29 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
           ease: "easeIn",
         }}
       >
+        {isDropdownOpen && (
+          <motion.div
+            className="dropdown-content-container"
+            key="dropdown"
+            exit={{ opacity: 0, filter: "blur(10px)" }}
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{
+              type: "spring",
+              duration: 0.3,
+              ease: "easeIn",
+            }}
+          >
+            <ul
+              style={{
+                background: isDropdownOpen ? "transparent" : "#c8c9c2",
+              }}
+              className={`${language}-font roterItemsList dropdown-content`}
+            >
+              {itemList}
+            </ul>
+          </motion.div>
+        )}
         {!isDropdownOpen && children}
       </motion.main>
       <Footer

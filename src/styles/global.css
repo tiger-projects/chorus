@@ -9,6 +9,8 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 /*
   2. Remove default margin
@@ -159,7 +161,6 @@ html {
     "header"
     "main"
     "footer";
-  overflow: hidden;
   position: relative;
 }
 
@@ -171,6 +172,7 @@ html {
   max-width: 100vw;
   grid-area: main;
   padding: 0.5rem 1rem;
+  margin-top: 44.2px;
 }
 
 .app > footer {
@@ -204,10 +206,18 @@ footer > a {
 footer > a > svg {
   margin: 0 auto;
   width: calc(100vw - 1.5rem);
-  max-width: 94rem;
   margin: 0 auto;
 }
 
+.logo-text {
+  display: none;
+}
+
+@media (min-width: 767px) {
+  .logo-text {
+    display: block;
+  }
+}
 /*
   12. Header
 */
@@ -220,8 +230,11 @@ footer > a > svg {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  position: relative;
   z-index: 10000;
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  overflow: scroll;
 }
 
 .center-links {
@@ -229,9 +242,6 @@ footer > a > svg {
   display: flex;
   justify-content: center;
   margin-right: auto;
-}
-
-.language-toggle {
 }
 
 .navbar a {
@@ -274,19 +284,21 @@ a.label-jp {
 
 .dropdown-container {
   display: inline-block;
-  position: relative;
   height: 100%;
+}
+
+.dropdown-content-container {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: -1rem;
 }
 
 .dropdown-content {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 50%;
-  right: auto;
   text-align: center;
-  transform: translate(-50%, 0);
-  z-index: 1000;
+  z-index: 100000;
 }
 
 a.language-label {
@@ -343,11 +355,18 @@ a.langActive {
   color: initial;
 }
 
-.roterItemsList > li > a.roster-list-items-hovered {
+.roterItemsList > li > a.roster-list-items-hovered.dark {
   color: #6b6e69;
 }
-.roterItemsList > li > a.roster-list-items-project-hovered {
+.roterItemsList > li > a.roster-list-items-hovered.light {
+  color: #e8e9e1;
+  opacity: 0.5;
+}
+.roterItemsList > li > a.roster-list-items-project-hovered.light {
   color: #000;
+}
+.roterItemsList > li > a.roster-list-items-project-hovered.dark {
+  color: #fff;
 }
 
 .roterItemsList > li:first-child {
@@ -379,10 +398,8 @@ a.langActive {
 }
 
 .roster-image-container {
-  height: auto;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  height: 100%;
+  width: 100%;
 }
 
 @media only screen and (min-width: 900px) {
@@ -391,7 +408,16 @@ a.langActive {
   }
   .roster-image-container {
     height: 100%;
+    width: 100%;
   }
+}
+
+.roster-image {
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .roster-image.light {
@@ -413,17 +439,9 @@ a.langActive {
   }
 }  */
 
-.logo-text {
-  display: block;
-}
-
 header {
   position: relative;
   width: 100vw;
-}
-
-.open {
-  position: relative;
 }
 
 .center-links,
@@ -438,30 +456,35 @@ header {
 
 .page-container__home > p,
 .page-container > p {
-  font-size: 1.375rem;
+  font-size: 1.75rem;
+  line-height: 1.1;
   font-weight: 500;
   color: #000;
 }
 
+.page-container__home {
+  height: 100vh;
+}
+
 .page-container > p {
-  margin-bottom: 1.375rem;
+  margin-bottom: 1.75rem;
 }
 
 @media (min-width: 767px) {
   . .center-links,
   .lanuguage-toggle {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .page-container__home > p,
   .page-container > p {
-    font-size: 1.75rem;
+    font-size: 2.2rem;
     font-weight: 500;
     color: #000;
   }
 
   .page-container > p {
-    margin-bottom: 1.375rem;
+    margin-bottom: 2rem;
   }
 }
 

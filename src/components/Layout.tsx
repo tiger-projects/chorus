@@ -237,7 +237,7 @@ const Layout: React.FC<LayoutProps> = ({ location, children, overflow }) => {
       )}
       <motion.main
         style={{
-          height: `calc(100vh - ${footerHeight}px - 44px)`,
+          height: `calc(100vh - ${footerHeight}px - 44px - 1.5rem)`,
         }}
         key={(currentPath || "") + isDropdownOpen}
         exit={{ opacity: 0, filter: "blur(0px)" }}

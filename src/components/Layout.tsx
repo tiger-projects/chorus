@@ -143,13 +143,13 @@ const Layout: React.FC<LayoutProps> = ({
 
         if (gatsbyImageData) {
           setDisplayedImage(null);
-          setTimeout(() => {
-            setDisplayedImage({ id, gatsbyImageData });
-          }, 300);
+          setDisplayedImage({ id, gatsbyImageData });
         }
       }
     }
   }, [hoveredProjectTitle]);
+
+  console.log(displayedImage);
 
   const handleMouseEnter = (title: string) => {
     setHoveredProjectTitle(title);
@@ -157,6 +157,7 @@ const Layout: React.FC<LayoutProps> = ({
 
   const handleMouseLeave = () => {
     setHoveredProjectTitle(null);
+    setDisplayedImage(null);
   };
 
   const itemList = Object.entries(rosterItems).map(([key, value], index) => {
@@ -222,8 +223,8 @@ const Layout: React.FC<LayoutProps> = ({
               filter: "blur(10px)",
               transition: {
                 delay: 0,
-                duration: 0.3,
-                ease: "easeOut",
+                duration: 0.2,
+                ease: "easeIn",
               },
             }}
             initial={{ opacity: 0.2, filter: "blur(10px)" }}
@@ -231,9 +232,9 @@ const Layout: React.FC<LayoutProps> = ({
               opacity: 1,
               filter: "blur(0px)",
               transition: {
-                delay: 0,
-                duration: 0.4,
-                ease: "easeIn",
+                delay: 0.2,
+                duration: 0.3,
+                ease: "easeOut",
               },
             }}
             height={height}

@@ -76,7 +76,7 @@ const Footer: React.FC<FooterProps> = ({
 
   return (
     <motion.footer
-      initial={{ opacity: 0, color: pallete ? "#E8E9E1" : "#FAFBF9" }}
+      initial={{ opacity: 1, color: pallete ? "#E8E9E1" : "#FAFBF9" }}
       animate={{
         opacity: 1,
         color: pallete ? "#E8E9E1" : "#FAFBF9",

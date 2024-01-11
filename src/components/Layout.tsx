@@ -232,7 +232,7 @@ const Layout: React.FC<LayoutProps> = ({
               filter: "blur(0px)",
               transition: {
                 delay: 0,
-                duration: 0.3,
+                duration: 0.4,
                 ease: "easeIn",
               },
             }}

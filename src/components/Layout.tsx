@@ -124,14 +124,6 @@ const Layout: React.FC<LayoutProps> = ({
 
   const pallete = hoveredProjectTitle ? getPalette(hoveredProjectTitle) : null;
 
-  const darkPaletteBackground = pallete
-    ? {
-        backgroundColor: "#555853",
-      }
-    : {
-        backgroundColor: "#e8e9e1",
-      };
-
   React.useEffect(() => {
     if (hoveredProjectTitle) {
       const selectedItem = extractedRosterItems.find(
@@ -149,8 +141,6 @@ const Layout: React.FC<LayoutProps> = ({
     }
   }, [hoveredProjectTitle]);
 
-  console.log(displayedImage);
-
   const handleMouseEnter = (title: string) => {
     setHoveredProjectTitle(title);
   };
@@ -160,6 +150,7 @@ const Layout: React.FC<LayoutProps> = ({
     setDisplayedImage(null);
   };
 
+  console.log(hoveredProjectTitle);
   const itemList = Object.entries(rosterItems).map(([key, value], index) => {
     return (
       <motion.li
@@ -168,34 +159,45 @@ const Layout: React.FC<LayoutProps> = ({
           transition: { duration: 0.4 },
         }}
         whileTap={{ color: pallete ? "#000" : "#000" }}
-        initial={{ color: "#c8c9c2" }}
+        initial={{ color: "#555853" }}
         key={index}
         onMouseEnter={() =>
           handleMouseEnter((value as any).node.englishProjectTitle)
         }
         onMouseLeave={() => handleMouseLeave()}
       >
-        <a
-          className={`${
-            hoveredProjectTitle === (value as any).node.englishProjectTitle
-              ? `roster-list-items-project-hovered ${
-                  pallete ? "dark" : "light"
-                }`
-              : hoveredProjectTitle !== null
-              ? `roster-list-items-hovered ${pallete ? "dark" : "light"}`
-              : ""
-          }`}
+        <motion.a
+          initial={{ color: "#000" }}
+          animate={{
+            color:
+              hoveredProjectTitle === (value as any).node.englishProjectTitle
+                ? pallete
+                  ? "#fff"
+                  : "#000"
+                : hoveredProjectTitle === null
+                ? "#000" // Set color to black when hoveredProjectTitle is null
+                : pallete
+                ? "#6b6e69"
+                : "#f7f8ed",
+            transition: { duration: 0.3, delay: 0.1 },
+          }}
           href="#"
         >
           {(value as any).node.englishProjectTitle}
-        </a>{" "}
+        </motion.a>
       </motion.li>
     );
   });
+  console.log(pallete);
   return (
     <motion.div
       ref={ref}
-      style={darkPaletteBackground}
+      exit={{ backgroundColor: pallete ? "#555853" : "#e8e9e1" }}
+      initial={{ backgroundColor: pallete ? "#555853" : "#e8e9e1" }}
+      animate={{
+        backgroundColor: pallete ? "#555853" : "#e8e9e1",
+        transition: { duration: 0.3, delay: 0.3 },
+      }}
       className={`${language}-font app ${
         overflow && !isDropdownOpen ? "overflow-scroll" : ""
       }`}
@@ -222,7 +224,7 @@ const Layout: React.FC<LayoutProps> = ({
               opacity: 1,
               filter: "blur(10px)",
               transition: {
-                delay: 0,
+                delay: 0.1,
                 duration: 0.3,
                 ease: "easeIn",
               },
@@ -232,7 +234,7 @@ const Layout: React.FC<LayoutProps> = ({
               opacity: 1,
               filter: "blur(0px)",
               transition: {
-                delay: 0,
+                delay: 0.1,
                 duration: 0.3,
                 ease: "easeOut",
               },
@@ -265,8 +267,8 @@ const Layout: React.FC<LayoutProps> = ({
             : `calc(100vh - ${footerHeight}px - 44px - 1.5rem)`,
         }}
         key={(currentPath || "") + isDropdownOpen}
-        exit={{ opacity: 0, filter: "blur(0px)" }}
-        initial={{ opacity: 0, filter: "blur(10px)" }}
+        exit={{ opacity: 1, filter: "blur(0px)" }}
+        initial={{ opacity: 1, filter: "blur(10px)" }}
         animate={{ opacity: 1, filter: "blur(0px)" }}
         transition={{
           type: "Spring",

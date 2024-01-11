@@ -5,6 +5,7 @@ import InvertedLogo from "../images/logo-white.svg";
 import LogoJp from "../images/logo-jp.svg";
 import InvertedLogoJp from "../images/logo-jp-white.svg";
 import { useGlobalContext } from "../context/languageContext";
+import { motion } from "framer-motion";
 
 interface FooterProps {
   pallete: any;
@@ -74,7 +75,16 @@ const Footer: React.FC<FooterProps> = ({
   }, [linkRef]);
 
   return (
-    <footer style={{ ...darkFooterPalette }}>
+    <motion.footer
+      initial={{ opacity: 0, color: pallete ? "#E8E9E1" : "#FAFBF9" }}
+      animate={{
+        opacity: 1,
+        color: pallete ? "#E8E9E1" : "#FAFBF9",
+        filter: pallete ? "invert(1)" : "none",
+        transition: { duration: 0.3, delay: 0.1 },
+      }}
+      exit={{ opacity: 1, transition: { duration: 0.3, delay: 0.1 } }}
+    >
       <Link
         style={{ ...footerStyle }}
         ref={linkRef}
@@ -95,7 +105,7 @@ const Footer: React.FC<FooterProps> = ({
           )
         ) : null}
       </Link>
-    </footer>
+    </motion.footer>
   );
 };
 

@@ -145,7 +145,7 @@ const Layout: React.FC<LayoutProps> = ({
           setDisplayedImage(null);
           setTimeout(() => {
             setDisplayedImage({ id, gatsbyImageData });
-          }, 50);
+          }, 300);
         }
       }
     }
@@ -219,20 +219,20 @@ const Layout: React.FC<LayoutProps> = ({
             key={displayedImage.id}
             exit={{
               opacity: 1,
-              filter: "blur(100px)",
+              filter: "blur(10px)",
               transition: {
                 delay: 0,
                 duration: 0.3,
                 ease: "easeOut",
               },
             }}
-            initial={{ opacity: 0, filter: "blur(60px)" }}
+            initial={{ opacity: 0.2, filter: "blur(10px)" }}
             animate={{
               opacity: 1,
               filter: "blur(0px)",
               transition: {
                 delay: 0,
-                duration: 0.4,
+                duration: 0.3,
                 ease: "easeIn",
               },
             }}

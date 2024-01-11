@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
+import { AnimatePresence } from "framer-motion";
 
 interface LayoutProps {
   title: string;
@@ -52,6 +53,7 @@ const Layout: React.FC<LayoutProps> = ({
   overflow,
   index,
 }) => {
+  const [displayedImage, setDisplayedImage] = useState<any | null>(null);
   const [footerHeight, setFooterHeight] = useState(0);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const { language } = useGlobalContext();
@@ -112,23 +114,6 @@ const Layout: React.FC<LayoutProps> = ({
     };
   });
 
-  const getFeaturedImage = (title: string): FeaturedImage | null => {
-    const selectedItem = extractedRosterItems.find(
-      (item: any) => item.englishProjectTitle === title
-    );
-
-    if (selectedItem) {
-      const { id, featuredImage } = selectedItem;
-      const gatsbyImageData = featuredImage?.asset.gatsbyImageData;
-
-      if (gatsbyImageData) {
-        return { id, gatsbyImageData };
-      }
-    }
-
-    return null;
-  };
-
   const getPalette = (title: string) => {
     const selectedItem = extractedRosterItems.find(
       (item: any) =>
@@ -147,9 +132,24 @@ const Layout: React.FC<LayoutProps> = ({
         backgroundColor: "#e8e9e1",
       };
 
-  const displayedImage = hoveredProjectTitle
-    ? getFeaturedImage(hoveredProjectTitle)
-    : null;
+  React.useEffect(() => {
+    if (hoveredProjectTitle) {
+      const selectedItem = extractedRosterItems.find(
+        (item: any) => item.englishProjectTitle === hoveredProjectTitle
+      );
+      if (selectedItem) {
+        const { id, featuredImage } = selectedItem;
+        const gatsbyImageData = featuredImage?.asset.gatsbyImageData;
+
+        if (gatsbyImageData) {
+          setDisplayedImage(null);
+          setTimeout(() => {
+            setDisplayedImage({ id, gatsbyImageData });
+          }, 50);
+        }
+      }
+    }
+  }, [hoveredProjectTitle]);
 
   const handleMouseEnter = (title: string) => {
     setHoveredProjectTitle(title);
@@ -164,7 +164,7 @@ const Layout: React.FC<LayoutProps> = ({
       <motion.li
         whileHover={{
           color: pallete ? "#000" : "#000",
-          transition: { duration: 0.5 },
+          transition: { duration: 0.4 },
         }}
         whileTap={{ color: pallete ? "#000" : "#000" }}
         initial={{ color: "#c8c9c2" }}
@@ -191,7 +191,6 @@ const Layout: React.FC<LayoutProps> = ({
       </motion.li>
     );
   });
-
   return (
     <motion.div
       ref={ref}
@@ -213,34 +212,51 @@ const Layout: React.FC<LayoutProps> = ({
         hoveredProjectTitle={hoveredProjectTitle}
         currentPath={currentPath}
       />
-      {displayedImage && (
-        <StyledDiv
-          height={height}
-          footerHeight={footerHeight}
-          isDropdownOpen={isDropdownOpen}
-          palette
-          className="roster-image-motion-container"
-        >
-          <motion.div
-            className="roster-image-container"
+      <AnimatePresence>
+        {displayedImage && (
+          <StyledDiv
+            as={motion.div}
             key={displayedImage.id}
-            exit={{ opacity: 0, filter: "blur(100px)" }}
-            initial={{ opacity: 0, filter: "blur(100px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ ease: "circInOut", duration: 0.6 }}
+            exit={{
+              opacity: 1,
+              filter: "blur(100px)",
+              transition: {
+                delay: 0,
+                duration: 0.3,
+                ease: "easeOut",
+              },
+            }}
+            initial={{ opacity: 0, filter: "blur(60px)" }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              transition: {
+                delay: 0,
+                duration: 0.4,
+                ease: "easeIn",
+              },
+            }}
+            height={height}
+            footerHeight={footerHeight}
+            isDropdownOpen={isDropdownOpen}
+            palette
+            className="roster-image-motion-container"
           >
-            <GatsbyImage
-              key={displayedImage.id}
-              style={{ height: "100%" }}
-              imgStyle={{ height: "100%", mixBlendMode: "multiply" }}
-              className={`roster-image ${pallete ? "dark" : "light"}`}
-              image={displayedImage.gatsbyImageData}
-              alt="Featured image"
-              objectFit="contain"
-            />
-          </motion.div>
-        </StyledDiv>
-      )}
+            <div className="roster-image-container" key={displayedImage.id}>
+              <GatsbyImage
+                key={displayedImage.id}
+                style={{ height: "100%" }}
+                imgStyle={{ height: "100%", mixBlendMode: "multiply" }}
+                className={`roster-image ${pallete ? "dark" : "light"}`}
+                image={displayedImage.gatsbyImageData}
+                alt="Featured image"
+                objectFit="contain"
+              />
+            </div>
+          </StyledDiv>
+        )}
+      </AnimatePresence>
+
       <motion.main
         style={{
           height: index

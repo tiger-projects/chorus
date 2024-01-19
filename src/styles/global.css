@@ -256,6 +256,10 @@ footer > a > svg {
   text-transform: uppercase;
 }
 
+a.language-label.label-en {
+  margin: 0 5px 0 15px;
+}
+
 @media (min-width: 547px) {
   .language-toggle {
     margin-left: auto;

@@ -5,7 +5,7 @@ import "../styles/global.css";
 import { useGlobalContext } from "../context/languageContext";
 
 const MissionPage: React.FC<PageProps> = ({ location }) => {
-  const { getTranslation } = useGlobalContext();
+  const { getTranslation, language } = useGlobalContext();
   const text = getTranslation("mission_text");
 
   return (
@@ -15,7 +15,9 @@ const MissionPage: React.FC<PageProps> = ({ location }) => {
       title={"Chorus Mission Page"}
       description="Chorus description"
     >
-      <div className="page-container mission">
+      <div
+        className={`${language === "jp" && "jp-text"} page-container mission`}
+      >
         {typeof text === "string" && <p>{text}</p>}
         {typeof text === "object" && (
           <>

@@ -5,8 +5,9 @@ import "../styles/global.css";
 import { useGlobalContext } from "../context/languageContext";
 
 const IndexPage: React.FC<PageProps> = ({ data, location }) => {
-  const { getTranslation } = useGlobalContext();
+  const { getTranslation, language } = useGlobalContext();
 
+  console.log(language);
   return (
     <Layout
       index={true}
@@ -14,7 +15,7 @@ const IndexPage: React.FC<PageProps> = ({ data, location }) => {
       title={"Chorus Homepage"}
       description="Chorus description"
     >
-      <div className="page-container__home">
+      <div className={`${language === "jp" && "jp-text"} page-container__home`}>
         <p>{getTranslation("home_text")}</p>
       </div>
     </Layout>

@@ -150,45 +150,43 @@ const Layout: React.FC<LayoutProps> = ({
     setDisplayedImage(null);
   };
 
-  console.log(hoveredProjectTitle);
-  const itemList = Object.entries(rosterItems).map(([key, value], index) => {
-    return (
-      <motion.li
-        whileHover={{
-          color: pallete ? "#000" : "#000",
-          transition: { duration: 0.4 },
-        }}
-        whileTap={{ color: pallete ? "#000" : "#000" }}
-        initial={{ color: "#555853" }}
-        key={index}
-        onMouseEnter={() =>
-          handleMouseEnter((value as any).node.englishProjectTitle)
-        }
-        onMouseLeave={() => handleMouseLeave()}
-      >
-        <motion.a
-          initial={{ color: "#000" }}
-          animate={{
-            color:
-              hoveredProjectTitle === (value as any).node.englishProjectTitle
-                ? pallete
-                  ? "#fff"
-                  : "#000"
-                : hoveredProjectTitle === null
-                ? "#000" // Set color to black when hoveredProjectTitle is null
-                : pallete
-                ? "#6b6e69"
-                : "#f7f8ed",
-            transition: { duration: 0.3, delay: 0.1 },
-          }}
-          href="#"
-        >
-          {(value as any).node.englishProjectTitle}
-        </motion.a>
-      </motion.li>
-    );
-  });
-  console.log(pallete);
+  // const itemList = Object.entries(rosterItems).map(([key, value], index) => {
+  //   return (
+  //     <motion.li
+  //       whileHover={{
+  //         color: pallete ? "#000" : "#000",
+  //         transition: { duration: 0.4 },
+  //       }}
+  //       whileTap={{ color: pallete ? "#000" : "#000" }}
+  //       initial={{ color: "#555853" }}
+  //       key={index}
+  //       onMouseEnter={() =>
+  //         handleMouseEnter((value as any).node.englishProjectTitle)
+  //       }
+  //       onMouseLeave={() => handleMouseLeave()}
+  //     >
+  //       <motion.a
+  //         initial={{ color: "#000" }}
+  //         animate={{
+  //           color:
+  //             hoveredProjectTitle === (value as any).node.englishProjectTitle
+  //               ? pallete
+  //                 ? "#fff"
+  //                 : "#000"
+  //               : hoveredProjectTitle === null
+  //               ? "#000" // Set color to black when hoveredProjectTitle is null
+  //               : pallete
+  //               ? "#6b6e69"
+  //               : "#f7f8ed",
+  //           transition: { duration: 0.3, delay: 0.1 },
+  //         }}
+  //         href="#"
+  //       >
+  //         {(value as any).node.englishProjectTitle}
+  //       </motion.a>
+  //     </motion.li>
+  //   );
+  // });
   return (
     <motion.div
       ref={ref}
@@ -289,14 +287,14 @@ const Layout: React.FC<LayoutProps> = ({
               ease: "easeIn",
             }}
           >
-            <ul
+            {/* <ul
               style={{
                 background: isDropdownOpen ? "transparent" : "#c8c9c2",
               }}
               className={`${language}-font roterItemsList dropdown-content`}
             >
               {itemList}
-            </ul>
+            </ul> */}
           </motion.div>
         )}
         {!isDropdownOpen && children}

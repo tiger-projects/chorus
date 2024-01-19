@@ -338,7 +338,7 @@ a.langActive {
 }
 
 .page-container p:last-child {
-  padding-bottom: 5rem;
+  padding-bottom: 8rem;
 }
 
 .page-container .mission-text {
@@ -466,12 +466,18 @@ header {
   color: #000;
 }
 
+.page-container__home.jp-text,
+.page-container.jp-text > p {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
 .page-container > p {
   margin-bottom: 1.75rem;
 }
 
 @media (min-width: 767px) {
-  . .center-links,
+  .center-links,
   .lanuguage-toggle {
     font-size: 1.1rem;
   }
@@ -483,6 +489,12 @@ header {
     color: #000;
   }
 
+  .page-container__home.jp-text,
+  .page-container.jp-text > p {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #000;
+  }
   .page-container > p {
     margin-bottom: 2rem;
   }
@@ -497,6 +509,13 @@ header {
   .page-container__home > p,
   .page-container > p {
     font-size: 2.6rem;
+    font-weight: 500;
+    color: #000;
+  }
+
+  .page-container__home.jp-text,
+  .page-container.jp-text > p {
+    font-size: 2.2rem;
     font-weight: 500;
     color: #000;
   }

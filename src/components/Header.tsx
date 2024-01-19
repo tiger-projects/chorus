@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "gatsby";
-import Dropdown from "./Dropdown";
+// import Dropdown from "./Dropdown";
 import LanguageToggle from "./LanguageToggle";
 import { useGlobalContext } from "../context/languageContext";
 import { GatsbyImage } from "gatsby-plugin-image";
@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({
               {getTranslation("nav_link_one")}
             </Link>
 
-            <Dropdown
+            {/* <Dropdown
               darkPaletteStyle={darkPaletteStyle}
               currentPath={currentPath || ""}
               setDropdownOpen={setDropdownOpen}
@@ -101,7 +101,7 @@ const Header: React.FC<HeaderProps> = ({
               hoveredProjectTitle={hoveredProjectTitle}
               setHoveredProjectTitle={setHoveredProjectTitle}
               rosterItems={rosterItems}
-            />
+            /> */}
 
             <Link
               id="navbar-main--link"

@@ -41,7 +41,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                         __html: text[key]
                           .replace(
                             /Instagram/gi,
-                            '<a class="contact_page__links" href="https://www.instagram.com/chorusasia/" target="_blank" rel="noopener noreferrer">Instagram</a>'
+                            '<a class="contact_page__links" href="https://www.instagram.com/chorus.asia/" target="_blank" rel="noopener noreferrer">Instagram</a>'
                           )
                           .replace(
                             /LinkedIn/gi,

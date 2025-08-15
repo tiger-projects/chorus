@@ -3,7 +3,7 @@ import { Translations } from "../types/types";
 export const translations: Translations = {
   en: {
     nav_link_one: "mission",
-    nav_link_two: "clients",
+    nav_link_two: "work",
     nav_link_three: "contact",
     footer_logo_text:
       "(noun)  / Part of a song recurring between verses  / Group of backing vocalists supporting the lead singer",

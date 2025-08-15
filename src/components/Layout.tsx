@@ -8,6 +8,7 @@ import Header from "./Header";
 import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
+import { useMemo } from "react";
 
 interface LayoutProps {
   title: string;
@@ -28,15 +29,13 @@ interface LinkStyleProps {
   palette?: boolean;
   footerHeight: number;
   height: number;
+  computedHeight: string;
 }
 
 const StyledDiv = styled.div<LinkStyleProps>`
   background: ${(props: any) =>
     props.isDropdownOpen ? "transparent" : "#e8e9e1"};
-  height: calc(
-    ${(props: any) => props.height}px - ${(props: any) => props.footerHeight}px -
-      44px
-  );
+  height: calc(${(props: any) => props.computedHeight});
   ${(props: any) =>
     props.palette &&
     `mix-blend-mode: multiply;
@@ -60,9 +59,15 @@ const Layout: React.FC<LayoutProps> = ({
   const [hoveredProjectTitle, setHoveredProjectTitle] = useState<string | null>(
     null
   );
+
   const [activeLink, setActiveLink] = useState("");
   const ref = React.useRef<HTMLDivElement>(null);
   const { height } = useWindowSize();
+
+  const computedHeight = useMemo(
+    () => `calc(${height}px - ${footerHeight}px - 44px)`,
+    [height, footerHeight]
+  );
 
   React.useEffect(() => {
     if (ref.current) {
@@ -238,6 +243,7 @@ const Layout: React.FC<LayoutProps> = ({
               },
             }}
             height={height}
+            computedHeight={computedHeight}
             footerHeight={footerHeight}
             isDropdownOpen={isDropdownOpen}
             palette

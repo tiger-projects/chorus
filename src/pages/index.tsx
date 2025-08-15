@@ -7,7 +7,6 @@ import { useGlobalContext } from "../context/languageContext";
 const IndexPage: React.FC<PageProps> = ({ data, location }) => {
   const { getTranslation, language } = useGlobalContext();
 
-  console.log(language);
   return (
     <Layout
       index={true}
